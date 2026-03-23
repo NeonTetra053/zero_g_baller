@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://tk366ojn3iso"]
+
+[ext_resource type="Script" path="res://scripts/chamber.gd" id="1_7f5pw"]
+[ext_resource type="Texture2D" uid="uid://b812nuinrux6d" path="res://art/chamber_1.png" id="2_fdiv6"]
+[ext_resource type="Texture2D" uid="uid://dilogx6feoyfl" path="res://art/chamber_2.png" id="3_eapda"]
+[ext_resource type="Texture2D" uid="uid://d2qirrbwtfxk1" path="res://art/bullets/basic_bullet.png" id="4_fy2yy"]
+[ext_resource type="Texture2D" uid="uid://c70gw3asxwv4q" path="res://art/bullets/heavy_bullet.png" id="5_jhyoq"]
+[ext_resource type="Texture2D" uid="uid://didj0dcqrqqrf" path="res://art/bullets/icy_bullet.png" id="6_sj4bl"]
+[ext_resource type="Texture2D" uid="uid://cmwu5q7v6x6ro" path="res://art/bullets/light_bullet.png" id="7_jj220"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rm0jy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_fy2yy")
+}],
+"loop": true,
+"name": &"basic",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"blank",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_jhyoq")
+}],
+"loop": true,
+"name": &"heavy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_sj4bl")
+}],
+"loop": true,
+"name": &"icy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_jj220")
+}],
+"loop": true,
+"name": &"light",
+"speed": 5.0
+}]
+
+[node name="chamber" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_7f5pw")
+
+[node name="Chamber1" type="Sprite2D" parent="."]
+texture = ExtResource("2_fdiv6")
+
+[node name="Chamber2" type="Sprite2D" parent="."]
+texture = ExtResource("3_eapda")
+
+[node name="sprite" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(14, -24)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"basic"
+
+[node name="sprite2" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(28, 0.999998)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"basic"
+
+[node name="sprite3" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(14, 24)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"basic"
+
+[node name="sprite4" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(-13, 24)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"basic"
+
+[node name="sprite5" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(-27, 1)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"basic"
+
+[node name="sprite6" type="AnimatedSprite2D" parent="Chamber2"]
+position = Vector2(-13, -24)
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_rm0jy")
+animation = &"blank"

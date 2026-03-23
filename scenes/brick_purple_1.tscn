@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://q6vbdytcb0fw"]
+
+[ext_resource type="Texture2D" uid="uid://nk6ta2ccbnp6" path="res://art/brick_purple_1.png" id="1_k452r"]
+[ext_resource type="Script" path="res://scripts/brick.gd" id="1_lskcn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xx1bd"]
+size = Vector2(48, 16)
+
+[node name="brick" type="StaticBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_lskcn")
+
+[node name="BrickPurple1" type="Sprite2D" parent="."]
+texture = ExtResource("1_k452r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xx1bd")

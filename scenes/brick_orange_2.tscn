@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2l2cdmq7h0ad"]
+
+[ext_resource type="Script" path="res://scripts/brick.gd" id="1_4knfa"]
+[ext_resource type="Texture2D" uid="uid://qaqf1aphkkl5" path="res://art/brick_orange_3.png" id="1_jr8aj"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_t6hpl"]
+points = PackedVector2Array(-8, -8, 8, -8, 8, 8)
+
+[node name="brick" type="StaticBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_4knfa")
+
+[node name="BrickPurple1" type="Sprite2D" parent="."]
+texture = ExtResource("1_jr8aj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("ConvexPolygonShape2D_t6hpl")

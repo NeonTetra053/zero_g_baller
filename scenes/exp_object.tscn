@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://b3qe0cvtsoq0n"]
+
+[ext_resource type="Script" path="res://scripts/exp_object.gd" id="1_1hgj5"]
+[ext_resource type="Texture2D" uid="uid://x5tivacg3cwp" path="res://art/objects/exp_sheet.png" id="2_oydjc"]
+[ext_resource type="Texture2D" uid="uid://vsgapxiwe6pc" path="res://art/effects/pop.png" id="3_xvf18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_irrj5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot2di"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 0, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27a07"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 7, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxqra"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 14, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3jjk"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 21, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mq6n"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 28, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwh2n"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(0, 35, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlxfg"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(12, 28, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_modmk"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(12, 21, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xavl"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(12, 14, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3wca"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(12, 7, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4do67"]
+atlas = ExtResource("2_oydjc")
+region = Rect2(12, 0, 12, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd6u8"]
+atlas = ExtResource("3_xvf18")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb4f4"]
+atlas = ExtResource("3_xvf18")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nih2x"]
+atlas = ExtResource("3_xvf18")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioc8d"]
+atlas = ExtResource("3_xvf18")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_psfyf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot2di")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27a07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxqra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3jjk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mq6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwh2n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlxfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_modmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xavl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3wca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4do67")
+}],
+"loop": true,
+"name": &"exp",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd6u8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb4f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nih2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioc8d")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 15.0
+}]
+
+[node name="CharacterBody2D" type="StaticBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_1hgj5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_irrj5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_psfyf")
+animation = &"exp"
+autoplay = "exp"
+frame_progress = 0.133335
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

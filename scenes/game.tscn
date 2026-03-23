@@ -1,0 +1,447 @@
+[gd_scene load_steps=29 format=3 uid="uid://got3cf20dx3o"]
+
+[ext_resource type="Script" uid="uid://dm84y3nhtj7gc" path="res://scripts/game.gd" id="1_1vysj"]
+[ext_resource type="Script" uid="uid://bq1qabdgfjpsn" path="res://scripts/game_elements.gd" id="2_pl11u"]
+[ext_resource type="PackedScene" uid="uid://ch0sdhcfnnove" path="res://scenes/cannon.tscn" id="2_vn7tc"]
+[ext_resource type="Texture2D" uid="uid://dkt2xl31480jb" path="res://art/backgrounds/bg_2.png" id="3_310xv"]
+[ext_resource type="Texture2D" uid="uid://c7t6gjc1xev76" path="res://art/background_wide.png" id="3_a2str"]
+[ext_resource type="Script" uid="uid://bb81nywmk7xd4" path="res://scripts/background.gd" id="4_b1y07"]
+[ext_resource type="Script" uid="uid://4wk2fhu6q2gg" path="res://scripts/ui.gd" id="5_ep3n4"]
+[ext_resource type="Texture2D" uid="uid://dtj1cencm6itg" path="res://art/ui/space_panel.png" id="5_pstqy"]
+[ext_resource type="PackedScene" uid="uid://tk366ojn3iso" path="res://scenes/chamber.tscn" id="6_6byn1"]
+[ext_resource type="PackedScene" uid="uid://brqo3ic6l4oqb" path="res://scenes/hp_bar_player.tscn" id="7_jn0vj"]
+[ext_resource type="Texture2D" uid="uid://der7248fjodqe" path="res://art/ui/button.png" id="7_mafw4"]
+[ext_resource type="Texture2D" uid="uid://bsjq5mufoq88" path="res://art/hp_bar.png" id="8_t7025"]
+[ext_resource type="Script" uid="uid://dr0m6bhnvygi2" path="res://scripts/ui_top_bar.gd" id="9_yyf2y"]
+[ext_resource type="PackedScene" uid="uid://dk1vm1ht1rpji" path="res://scenes/collection_menu.tscn" id="10_3gvjk"]
+[ext_resource type="Texture2D" uid="uid://cairwtvnsdmdo" path="res://art/top_ui.png" id="10_bpsgb"]
+[ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="10_e1j6l"]
+[ext_resource type="Texture2D" uid="uid://bm3g8bno4cvh0" path="res://art/coin.png" id="11_11c4y"]
+[ext_resource type="FontFile" uid="uid://dve7d7c8gx1sf" path="res://font/easvhs.ttf" id="12_e7s3i"]
+[ext_resource type="Texture2D" uid="uid://tbjtbqnmbcjk" path="res://art/ui/logo.png" id="13_bhx41"]
+[ext_resource type="Texture2D" uid="uid://x7so5167y5f8" path="res://art/pause.png" id="13_visnf"]
+[ext_resource type="Script" uid="uid://cs3noli375xtu" path="res://scripts/level.gd" id="14_5jk8s"]
+[ext_resource type="PackedScene" uid="uid://j6wqw7n82fku" path="res://scenes/complete_ui.tscn" id="15_7gt47"]
+[ext_resource type="Texture2D" uid="uid://dfvuc5s4i4pin" path="res://art/border.png" id="15_oub8e"]
+[ext_resource type="PackedScene" uid="uid://uf70nd2u4yd8" path="res://scenes/pause_menu.tscn" id="24_bhx41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayusw"]
+size = Vector2(90, 822)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kc3iy"]
+size = Vector2(536, 178)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m3y4h"]
+font = ExtResource("12_e7s3i")
+font_size = 17
+outline_size = 8
+outline_color = Color(0.149022, 0.176733, 0.23304, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_52gi2"]
+font = ExtResource("10_e1j6l")
+font_color = Color(0, 0.904031, 0.904031, 1)
+outline_size = 8
+outline_color = Color(0, 0.419346, 0.503155, 1)
+
+[node name="Core" type="Node2D"]
+top_level = true
+z_index = 3
+texture_filter = 1
+position = Vector2(0, -1)
+script = ExtResource("1_1vysj")
+
+[node name="GameElements" type="CanvasLayer" parent="."]
+layer = 0
+visible = false
+script = ExtResource("2_pl11u")
+
+[node name="border_sprite" type="Sprite2D" parent="GameElements"]
+z_index = 5
+position = Vector2(160, 558)
+texture = ExtResource("15_oub8e")
+
+[node name="cannon" parent="GameElements" instance=ExtResource("2_vn7tc")]
+position = Vector2(160, 646)
+scale = Vector2(1.5, 1.5)
+
+[node name="edge_borders" type="Node2D" parent="GameElements"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameElements/edge_borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameElements/edge_borders/StaticBody2D"]
+position = Vector2(-48, 307)
+shape = SubResource("RectangleShape2D_ayusw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameElements/edge_borders/StaticBody2D"]
+position = Vector2(367, 303)
+shape = SubResource("RectangleShape2D_ayusw")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameElements/edge_borders/StaticBody2D"]
+position = Vector2(152, -47)
+shape = SubResource("RectangleShape2D_kc3iy")
+
+[node name="bullets" type="Node2D" parent="GameElements"]
+
+[node name="level" type="Node2D" parent="GameElements"]
+z_index = 2
+script = ExtResource("14_5jk8s")
+
+[node name="bg_filler" type="Sprite2D" parent="GameElements"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(161, 344)
+scale = Vector2(2.135, 2.135)
+texture = ExtResource("3_310xv")
+
+[node name="bg_stars" type="Sprite2D" parent="GameElements"]
+z_index = -1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_a2str")
+centered = false
+offset = Vector2(-128, -64)
+script = ExtResource("4_b1y07")
+
+[node name="chamber" parent="GameElements" instance=ExtResource("6_6byn1")]
+position = Vector2(1, 614)
+
+[node name="hp_bar" parent="GameElements" instance=ExtResource("7_jn0vj")]
+offset_left = 297.0
+offset_top = 570.0
+offset_right = 307.0
+offset_bottom = 628.0
+scale = Vector2(1.5, 1.5)
+
+[node name="HpBar" type="Sprite2D" parent="GameElements/hp_bar"]
+z_index = -1
+position = Vector2(5.33334, 29.3333)
+texture = ExtResource("8_t7025")
+
+[node name="hp_bar_label" type="Label" parent="GameElements/hp_bar"]
+layout_mode = 0
+offset_left = -25.999998
+offset_top = -16.666666
+offset_right = 52.0
+offset_bottom = 6.333334
+scale = Vector2(0.8, 0.8)
+text = "HP"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 1
+
+[node name="main_menu_ui" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="bg_filler" type="Sprite2D" parent="main_menu_ui"]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(161, 344)
+scale = Vector2(2.135, 2.135)
+texture = ExtResource("3_310xv")
+
+[node name="bg_stars" type="Sprite2D" parent="main_menu_ui"]
+z_index = -1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3_a2str")
+centered = false
+offset = Vector2(-128, -64)
+script = ExtResource("4_b1y07")
+
+[node name="space_panel" type="Sprite2D" parent="main_menu_ui"]
+z_index = 4
+position = Vector2(0, 406)
+scale = Vector2(2, 2)
+texture = ExtResource("5_pstqy")
+centered = false
+
+[node name="Label" type="Label" parent="main_menu_ui"]
+modulate = Color(1, 1, 1, 0.470588)
+z_index = 4
+offset_left = 235.0
+offset_top = 664.0
+offset_right = 348.0
+offset_bottom = 687.0
+scale = Vector2(0.7, 0.7)
+text = "NeonTetra053"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 2
+
+[node name="main_menu_button" type="Button" parent="main_menu_ui"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 207.0
+offset_right = 214.0
+offset_bottom = 251.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button"]
+position = Vector2(54, 129)
+scale = Vector2(2, 2)
+texture = ExtResource("7_mafw4")
+
+[node name="Label" type="Label" parent="main_menu_ui/main_menu_button"]
+z_index = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 39.0
+scale = Vector2(0.7, 0.7)
+text = "PLAY"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button2" type="Button" parent="main_menu_ui"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 260.0
+offset_right = 214.0
+offset_bottom = 304.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button2"]
+position = Vector2(54, 22)
+scale = Vector2(2, 2)
+texture = ExtResource("7_mafw4")
+
+[node name="Label" type="Label" parent="main_menu_ui/main_menu_button2"]
+z_index = 1
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 130.0
+offset_bottom = 48.0
+scale = Vector2(0.7, 0.7)
+text = "COLLECTION"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button3" type="Button" parent="main_menu_ui"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 314.0
+offset_right = 214.0
+offset_bottom = 358.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button3"]
+position = Vector2(54, -85)
+scale = Vector2(2, 2)
+texture = ExtResource("7_mafw4")
+
+[node name="Label" type="Label" parent="main_menu_ui/main_menu_button3"]
+z_index = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 14.0
+offset_right = 128.0
+offset_bottom = 48.0
+scale = Vector2(0.7, 0.7)
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button4" type="Button" parent="main_menu_ui"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 367.0
+offset_right = 214.0
+offset_bottom = 411.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button4"]
+scale = Vector2(2, 2)
+texture = ExtResource("7_mafw4")
+centered = false
+
+[node name="Label" type="Label" parent="main_menu_ui/main_menu_button4"]
+z_index = 1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = 181.0
+offset_bottom = 51.0
+scale = Vector2(0.5, 0.5)
+text = "ASTEROID BUSTER"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="collection_menu" parent="main_menu_ui" instance=ExtResource("10_3gvjk")]
+visible = false
+z_index = 9
+offset_top = -23.0
+offset_bottom = -23.0
+
+[node name="logo_sprite" type="Sprite2D" parent="main_menu_ui"]
+z_index = 1
+position = Vector2(159, 88)
+scale = Vector2(2, 2)
+texture = ExtResource("13_bhx41")
+
+[node name="ui" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("5_ep3n4")
+
+[node name="Button" type="Button" parent="ui"]
+visible = false
+offset_left = 269.0
+offset_top = 92.0
+offset_right = 340.0
+offset_bottom = 123.0
+scale = Vector2(0.7, 0.7)
+text = "RELOAD"
+
+[node name="Button2" type="Button" parent="ui"]
+visible = false
+offset_left = 268.0
+offset_top = 67.0
+offset_right = 339.0
+offset_bottom = 98.0
+scale = Vector2(0.7, 0.7)
+text = "Refresh"
+
+[node name="Button4" type="Button" parent="ui"]
+offset_left = 276.0
+offset_top = 118.0
+offset_right = 301.7143
+offset_bottom = 149.0
+scale = Vector2(0.7, 0.7)
+text = "1"
+
+[node name="Button5" type="Button" parent="ui"]
+offset_left = 299.00003
+offset_top = 118.99999
+offset_right = 324.71432
+offset_bottom = 150.0
+scale = Vector2(0.7, 0.7)
+text = "2"
+
+[node name="Button6" type="Button" parent="ui"]
+offset_left = 277.0
+offset_top = 144.0
+offset_right = 302.7143
+offset_bottom = 175.0
+scale = Vector2(0.7, 0.7)
+text = "3"
+
+[node name="Button7" type="Button" parent="ui"]
+offset_left = 299.0
+offset_top = 145.00002
+offset_right = 324.7143
+offset_bottom = 176.00002
+scale = Vector2(0.7, 0.7)
+text = "4"
+
+[node name="Button8" type="Button" parent="ui"]
+offset_left = 276.0
+offset_top = 171.0
+offset_right = 301.7143
+offset_bottom = 202.0
+scale = Vector2(0.7, 0.7)
+text = "5"
+
+[node name="Button9" type="Button" parent="ui"]
+offset_left = 300.00003
+offset_top = 170.0
+offset_right = 325.71432
+offset_bottom = 201.0
+scale = Vector2(0.7, 0.7)
+text = "6"
+
+[node name="Button10" type="Button" parent="ui"]
+offset_left = 278.0
+offset_top = 196.0
+offset_right = 303.7143
+offset_bottom = 227.0
+scale = Vector2(0.7, 0.7)
+text = "7"
+
+[node name="Button11" type="Button" parent="ui"]
+offset_left = 300.0
+offset_top = 194.99998
+offset_right = 325.7143
+offset_bottom = 225.99998
+scale = Vector2(0.7, 0.7)
+text = "8"
+
+[node name="pause_button" type="Button" parent="ui"]
+modulate = Color(2.264654, 2.264654, 2.264654, 0)
+z_index = 2
+offset_left = 2.0000153
+offset_top = -3.9999924
+offset_right = 54.857132
+offset_bottom = 60.285706
+scale = Vector2(0.7, 0.7)
+text = "
+"
+
+[node name="Button3" type="Button" parent="ui"]
+offset_left = 234.0
+offset_top = 42.0
+offset_right = 355.0
+offset_bottom = 73.0
+scale = Vector2(0.7, 0.7)
+text = "move enemies"
+
+[node name="ui_top_bar" type="Control" parent="ui"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("9_yyf2y")
+
+[node name="TopUi" type="Sprite2D" parent="ui/ui_top_bar"]
+position = Vector2(160, 9)
+texture = ExtResource("10_bpsgb")
+
+[node name="Coin" type="Sprite2D" parent="ui/ui_top_bar"]
+z_index = 1
+position = Vector2(303, 21)
+scale = Vector2(2, 2)
+texture = ExtResource("11_11c4y")
+
+[node name="Coin2" type="Sprite2D" parent="ui/ui_top_bar"]
+self_modulate = Color(0, 0, 0, 0.305882)
+position = Vector2(301, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("11_11c4y")
+
+[node name="Label" type="Label" parent="ui/ui_top_bar"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 14.0
+offset_right = 293.0
+offset_bottom = 37.0
+text = "150"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 2
+
+[node name="Label2" type="Label" parent="ui/ui_top_bar"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 13.0
+offset_right = 197.0
+offset_bottom = 36.0
+text = "Ldew"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 1
+
+[node name="Pause" type="Sprite2D" parent="ui/ui_top_bar"]
+position = Vector2(20, 20)
+scale = Vector2(2, 2)
+texture = ExtResource("13_visnf")
+
+[node name="complete_menu" parent="ui" instance=ExtResource("15_7gt47")]
+visible = false
+
+[node name="pause_menu" parent="ui" instance=ExtResource("24_bhx41")]
+visible = false
+
+[node name="focus_marker" type="Marker2D" parent="."]
+
+[connection signal="pressed" from="main_menu_ui/main_menu_button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="main_menu_ui/main_menu_button2" to="." method="_on_main_menu_button_2_pressed"]
+[connection signal="pressed" from="main_menu_ui/main_menu_button4" to="." method="_on_main_menu_button_4_pressed"]
+[connection signal="pressed" from="ui/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ui/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="ui/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="ui/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="ui/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="ui/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="ui/Button8" to="." method="_on_button_8_pressed"]
+[connection signal="pressed" from="ui/Button9" to="." method="_on_button_9_pressed"]
+[connection signal="pressed" from="ui/Button10" to="." method="_on_button_10_pressed"]
+[connection signal="pressed" from="ui/Button11" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="ui/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="ui/Button3" to="." method="_on_button_3_pressed"]

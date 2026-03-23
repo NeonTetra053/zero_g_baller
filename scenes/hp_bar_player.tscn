@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://brqo3ic6l4oqb"]
+
+[ext_resource type="FontFile" uid="uid://80v3eqpxnjv3" path="res://font/vhs-gothic.ttf" id="1_plqyq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xer75"]
+bg_color = Color(0.339709, 0.355468, 0.427081, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.182079, 0.192054, 0.237263, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqvs4"]
+bg_color = Color(0.36249, 0.747479, 0.240489, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.161368, 0.531792, 9.62615e-08, 1)
+
+[node name="ProgressBar" type="ProgressBar"]
+offset_right = 10.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("1_plqyq")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_xer75")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vqvs4")
+step = 1.0
+value = 54.0
+fill_mode = 3
+show_percentage = false

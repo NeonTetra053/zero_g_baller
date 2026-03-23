@@ -1,0 +1,585 @@
+[gd_scene load_steps=18 format=3 uid="uid://dk1vm1ht1rpji"]
+
+[ext_resource type="Script" uid="uid://tp5hfci4x0ki" path="res://scripts/collection_ui.gd" id="1_ofggi"]
+[ext_resource type="Texture2D" uid="uid://uj830d21yxus" path="res://art/ui/collection_menu.png" id="2_lf1v6"]
+[ext_resource type="Shader" uid="uid://dtiihk13rvjif" path="res://scripts/cyan.gdshader" id="3_1o4rt"]
+[ext_resource type="Texture2D" uid="uid://d2qirrbwtfxk1" path="res://art/bullets/basic_bullet.png" id="4_r6xh7"]
+[ext_resource type="Texture2D" uid="uid://c70gw3asxwv4q" path="res://art/bullets/heavy_bullet.png" id="5_yjiid"]
+[ext_resource type="Texture2D" uid="uid://didj0dcqrqqrf" path="res://art/bullets/icy_bullet.png" id="6_0fmhc"]
+[ext_resource type="Texture2D" uid="uid://cmwu5q7v6x6ro" path="res://art/bullets/light_bullet.png" id="7_4d1kj"]
+[ext_resource type="Texture2D" uid="uid://6xmoob4fuemu" path="res://art/bullets/nano_shot.png" id="8_jhwjt"]
+[ext_resource type="Texture2D" uid="uid://c2k56ah13r2oe" path="res://art/bullets/shock_bullet.png" id="9_xog7l"]
+[ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="10_fuh6k"]
+[ext_resource type="Script" uid="uid://dsmqk2xw1u6iu" path="res://scripts/bullet_detail.gd" id="11_8xfkk"]
+[ext_resource type="Shader" uid="uid://cbrf5w440wv2l" path="res://scripts/collection_menu.gdshader" id="11_qqsku"]
+[ext_resource type="Texture2D" uid="uid://c5yg6lsqavagu" path="res://art/ui/bullet_detail_menu.png" id="12_6mnxs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fmp2"]
+shader = ExtResource("3_1o4rt")
+shader_parameter/cyan_color = Color(0, 1, 0.85, 1)
+shader_parameter/contrast = 1.2
+shader_parameter/brightness = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_87kqi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_r6xh7")
+}],
+"loop": true,
+"name": &"basic",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_yjiid")
+}],
+"loop": true,
+"name": &"heavy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0fmhc")
+}],
+"loop": true,
+"name": &"icy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_4d1kj")
+}],
+"loop": true,
+"name": &"light",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_jhwjt")
+}],
+"loop": true,
+"name": &"nano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_xog7l")
+}],
+"loop": true,
+"name": &"shock",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_p5wsa"]
+line_spacing = -16.0
+font = ExtResource("10_fuh6k")
+font_color = Color(0, 0.837235, 0.837234, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tuifv"]
+shader = ExtResource("11_qqsku")
+shader_parameter/reveal = 1.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofggi")
+
+[node name="collection_ui" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="sprite" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 166)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"heavy"
+
+[node name="sprite2" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 228)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"basic"
+
+[node name="sprite3" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 293)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"basic"
+
+[node name="sprite4" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 357)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"basic"
+
+[node name="sprite5" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 421)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"basic"
+
+[node name="sprite6" type="AnimatedSprite2D" parent="collection_ui"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(65, 484)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"basic"
+
+[node name="Label7" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 54.0
+offset_top = 526.0
+offset_right = 246.0
+offset_bottom = 560.0
+scale = Vector2(1.1, 1.1)
+text = "[ < ]          [exit]        [ > ]"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 154.0
+offset_right = 264.0
+offset_bottom = 188.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 216.0
+offset_right = 264.0
+offset_bottom = 250.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 281.0
+offset_right = 264.0
+offset_bottom = 315.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 343.0
+offset_right = 264.0
+offset_bottom = 377.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 408.0
+offset_right = 264.0
+offset_bottom = 442.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="collection_ui"]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 473.0
+offset_right = 264.0
+offset_bottom = 507.0
+text = "Standard"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="CollectionMenu" type="Sprite2D" parent="collection_ui"]
+z_index = -1
+position = Vector2(0, 100)
+scale = Vector2(2, 2)
+texture = ExtResource("2_lf1v6")
+centered = false
+
+[node name="Button" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 135.0
+offset_right = 288.0
+offset_bottom = 195.0
+
+[node name="Button2" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 199.0
+offset_right = 288.0
+offset_bottom = 259.0
+
+[node name="Button3" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 263.0
+offset_right = 288.0
+offset_bottom = 323.0
+
+[node name="Button4" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 327.0
+offset_right = 288.0
+offset_bottom = 387.0
+
+[node name="Button5" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 391.0
+offset_right = 288.0
+offset_bottom = 451.0
+
+[node name="Button6" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 456.0
+offset_right = 288.0
+offset_bottom = 516.0
+
+[node name="Button7" type="Button" parent="collection_ui"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 129.0
+offset_top = 524.0
+offset_right = 194.0
+offset_bottom = 548.0
+
+[node name="bullet_detail" type="Control" parent="."]
+visible = false
+clip_children = 1
+z_index = 1
+clip_contents = true
+anchors_preset = 0
+offset_right = 322.0
+offset_bottom = 685.0
+script = ExtResource("11_8xfkk")
+
+[node name="TextureRect" type="TextureRect" parent="bullet_detail"]
+clip_children = 1
+material = SubResource("ShaderMaterial_tuifv")
+clip_contents = true
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -341.5
+offset_bottom = 352.5
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+
+[node name="BulletDetailMenu" type="Sprite2D" parent="bullet_detail/TextureRect"]
+position = Vector2(0, 101)
+scale = Vector2(2, 2)
+texture = ExtResource("12_6mnxs")
+centered = false
+
+[node name="sprite" type="AnimatedSprite2D" parent="bullet_detail/TextureRect"]
+z_index = 1
+material = SubResource("ShaderMaterial_0fmp2")
+position = Vector2(90, 193)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_87kqi")
+animation = &"nano"
+
+[node name="name_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 118.0
+offset_right = 204.0
+offset_bottom = 152.0
+scale = Vector2(0.9, 0.9)
+text = "Standard bullet"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="speed_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 143.0
+offset_right = 301.0
+offset_bottom = 177.0
+scale = Vector2(0.9, 0.9)
+text = "speed:"
+label_settings = SubResource("LabelSettings_p5wsa")
+
+[node name="size_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 163.0
+offset_right = 301.0
+offset_bottom = 197.0
+scale = Vector2(0.9, 0.9)
+text = "size:"
+label_settings = SubResource("LabelSettings_p5wsa")
+
+[node name="mass_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 182.0
+offset_right = 301.0
+offset_bottom = 216.0
+scale = Vector2(0.9, 0.9)
+text = "mass:"
+label_settings = SubResource("LabelSettings_p5wsa")
+
+[node name="stability_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 203.0
+offset_right = 301.0
+offset_bottom = 237.0
+scale = Vector2(0.9, 0.9)
+text = "stability:"
+label_settings = SubResource("LabelSettings_p5wsa")
+
+[node name="desc_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 248.0
+offset_right = 191.0
+offset_bottom = 282.0
+scale = Vector2(0.9, 0.9)
+text = "description:"
+label_settings = SubResource("LabelSettings_p5wsa")
+
+[node name="desc_info" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 268.0
+offset_right = 387.0
+offset_bottom = 368.0
+scale = Vector2(0.7, 0.7)
+text = "Bullet covered in condensed ice. Medium size and mass, low stability. Hard to stop once fired."
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_name_1" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 340.0
+offset_right = 385.0
+offset_bottom = 440.0
+scale = Vector2(0.8, 0.8)
+text = "Propulsion"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_name_2" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 400.0
+offset_right = 381.0
+offset_bottom = 500.0
+scale = Vector2(0.8, 0.8)
+text = "Stability"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_name_3" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 464.0
+offset_right = 382.0
+offset_bottom = 564.0
+scale = Vector2(0.8, 0.8)
+text = "Density"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_desc_1" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 356.0
+offset_right = 491.36365
+offset_bottom = 456.0
+scale = Vector2(0.55, 0.55)
+text = "Increases initial speed"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_desc_2" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 415.99997
+offset_right = 496.81818
+offset_bottom = 516.0
+scale = Vector2(0.55, 0.55)
+text = "- Increases initial speed"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_desc_3" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 479.0
+offset_right = 489.54547
+offset_bottom = 579.0
+scale = Vector2(0.55, 0.55)
+text = "- Increases initial speed"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_bar_1" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 380.99997
+offset_right = 382.0
+offset_bottom = 480.99997
+scale = Vector2(0.7, 0.7)
+text = "[   ] [    ] [    ] [    ] [    ]"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_bar_2" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 440.0
+offset_right = 382.0
+offset_bottom = 540.0
+scale = Vector2(0.7, 0.7)
+text = "[   ] [    ] [    ] [    ] [    ]"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="upgrade_bar_3" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 498.99997
+offset_right = 382.0
+offset_bottom = 599.0
+scale = Vector2(0.7, 0.7)
+text = "[   ] [    ] [    ] [    ] [    ]"
+label_settings = SubResource("LabelSettings_p5wsa")
+autowrap_mode = 2
+
+[node name="buy_1" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 127.00001
+offset_top = 376.00003
+offset_right = 474.0
+offset_bottom = 476.00006
+scale = Vector2(0.7, 0.7)
+text = "UP 20G"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="buy_2" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 127.00001
+offset_top = 435.0
+offset_right = 474.0
+offset_bottom = 535.0
+scale = Vector2(0.7, 0.7)
+text = "UP 20G"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="buy_3" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 127.00001
+offset_top = 497.99997
+offset_right = 474.0
+offset_bottom = 598.0
+scale = Vector2(0.7, 0.7)
+text = "UP 20G"
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="buttons_label" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 58.0
+offset_top = 526.0
+offset_right = 250.0
+offset_bottom = 560.0
+scale = Vector2(1.1, 1.1)
+text = "        [exit]        "
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="bullet_detail/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 129.0
+offset_top = 524.0
+offset_right = 194.0
+offset_bottom = 548.0
+
+[node name="buy_button_1" type="Button" parent="bullet_detail/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 211.0
+offset_top = 367.0
+offset_right = 282.0
+offset_bottom = 397.0
+
+[node name="buy_button_2" type="Button" parent="bullet_detail/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 211.0
+offset_top = 425.0
+offset_right = 282.0
+offset_bottom = 455.0
+
+[node name="buy_button_3" type="Button" parent="bullet_detail/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 211.0
+offset_top = 482.0
+offset_right = 282.0
+offset_bottom = 512.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="collection_ui/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="collection_ui/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="collection_ui/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="collection_ui/Button4" to="." method="_on_button_4_pressed"]
+[connection signal="pressed" from="collection_ui/Button5" to="." method="_on_button_5_pressed"]
+[connection signal="pressed" from="collection_ui/Button6" to="." method="_on_button_6_pressed"]
+[connection signal="pressed" from="collection_ui/Button7" to="." method="_on_button_7_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/Button" to="bullet_detail" method="_on_button_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/buy_button_1" to="bullet_detail" method="_on_buy_button_1_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/buy_button_2" to="bullet_detail" method="_on_buy_button_2_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/buy_button_3" to="bullet_detail" method="_on_buy_button_3_pressed"]

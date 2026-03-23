@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://b5ak2t01fj1n"]
+
+[ext_resource type="Script" path="res://scripts/ufo_attack.gd" id="1_yoi2w"]
+[ext_resource type="Texture2D" uid="uid://si58te6mcycw" path="res://art/enemy/bullet3.png" id="2_xbijg"]
+[ext_resource type="Texture2D" uid="uid://bwxcbl02djhee" path="res://art/enemy/bullet4.png" id="3_akeh6"]
+[ext_resource type="Texture2D" uid="uid://b0lwton26dii0" path="res://art/enemy/bullet1.png" id="4_wwbfm"]
+[ext_resource type="Texture2D" uid="uid://da0sb2okkqiol" path="res://art/enemy/bullet2.png" id="5_ybkpf"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yh0re"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xbijg")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_akeh6")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wwbfm")
+}],
+"loop": true,
+"name": &"teal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ybkpf")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_5fl2b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mpl23"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uavc5"]
+_data = {
+"RESET": SubResource("Animation_5fl2b"),
+"shoot": SubResource("Animation_mpl23")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_yoi2w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_yh0re")
+animation = &"yellow"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uavc5")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

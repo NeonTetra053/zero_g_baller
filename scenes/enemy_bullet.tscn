@@ -1,0 +1,101 @@
+[gd_scene load_steps=10 format=3 uid="uid://clr4ib7f6srwo"]
+
+[ext_resource type="Script" path="res://scripts/enemy_bullet.gd" id="1_xa6t5"]
+[ext_resource type="Texture2D" uid="uid://b0lwton26dii0" path="res://art/enemy/bullet1.png" id="2_ijir7"]
+[ext_resource type="Texture2D" uid="uid://da0sb2okkqiol" path="res://art/enemy/bullet2.png" id="3_hsicr"]
+[ext_resource type="Texture2D" uid="uid://si58te6mcycw" path="res://art/enemy/bullet3.png" id="4_ulg3r"]
+[ext_resource type="Texture2D" uid="uid://bwxcbl02djhee" path="res://art/enemy/bullet4.png" id="5_srmbb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qekyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ijir7")
+}],
+"loop": true,
+"name": &"1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hsicr")
+}],
+"loop": true,
+"name": &"2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ulg3r")
+}],
+"loop": true,
+"name": &"3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_srmbb")
+}],
+"loop": true,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_8yhou"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p5td6"]
+resource_name = "fire"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 100)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_utpg1"]
+_data = {
+"RESET": SubResource("Animation_8yhou"),
+"fire": SubResource("Animation_p5td6")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_xa6t5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qekyy")
+animation = &"1"
+autoplay = "1"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_utpg1")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

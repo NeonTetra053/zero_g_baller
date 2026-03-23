@@ -1,0 +1,144 @@
+[gd_scene load_steps=11 format=3 uid="uid://c283suwmah4rf"]
+
+[ext_resource type="Script" uid="uid://blsx2qfggpytc" path="res://scripts/bullet.gd" id="1_75hke"]
+[ext_resource type="Texture2D" uid="uid://d2qirrbwtfxk1" path="res://art/bullets/basic_bullet.png" id="2_hsbe2"]
+[ext_resource type="Texture2D" uid="uid://c70gw3asxwv4q" path="res://art/bullets/heavy_bullet.png" id="3_6h043"]
+[ext_resource type="Texture2D" uid="uid://didj0dcqrqqrf" path="res://art/bullets/icy_bullet.png" id="4_hls4v"]
+[ext_resource type="Texture2D" uid="uid://cmwu5q7v6x6ro" path="res://art/bullets/light_bullet.png" id="5_wh3q3"]
+[ext_resource type="Texture2D" uid="uid://6xmoob4fuemu" path="res://art/bullets/nano_shot.png" id="6_nc2hd"]
+[ext_resource type="Texture2D" uid="uid://c2k56ah13r2oe" path="res://art/bullets/shock_bullet.png" id="7_ndeyi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r8i3w"]
+bounce = 1.1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0bgm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hsbe2")
+}],
+"loop": true,
+"name": &"basic",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6h043")
+}],
+"loop": true,
+"name": &"heavy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hls4v")
+}],
+"loop": true,
+"name": &"icy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wh3q3")
+}],
+"loop": true,
+"name": &"light",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nc2hd")
+}],
+"loop": true,
+"name": &"nano",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ndeyi")
+}],
+"loop": true,
+"name": &"shock",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e08b2"]
+radius = 8.0
+
+[node name="Node2D" type="RigidBody2D"]
+rotation = 1.5708
+mass = 2.0
+physics_material_override = SubResource("PhysicsMaterial_r8i3w")
+gravity_scale = 0.0
+can_sleep = false
+continuous_cd = 2
+linear_damp = 1.0
+script = ExtResource("1_75hke")
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, 2.27374e-13)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_e0bgm")
+animation = &"nano"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2.27374e-13)
+scale = Vector2(0.4, 0.4)
+shape = SubResource("CircleShape2D_e08b2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 2.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 45.0
+initial_velocity_max = 45.0
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(0.370248, 0.818767, 1, 1)
+
+[node name="nano_paticle" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+direction = Vector2(0, 0)
+spread = 12.27
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(0.404485, 1, 0.355875, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.0431373)
+emitting = false
+amount = 60
+texture = ExtResource("2_hsbe2")
+lifetime = 0.2
+direction = Vector2(0, 0)
+spread = 0.0
+gravity = Vector2(0, 0)
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(0, -2.27374e-13)
+emitting = false
+amount = 45
+one_shot = true
+speed_scale = 5.0
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://uf70nd2u4yd8"]
+
+[ext_resource type="Script" uid="uid://dshwtqmu52o1y" path="res://scripts/pause_menu.gd" id="1_kukqi"]
+[ext_resource type="Texture2D" uid="uid://ch4iwn80wruyl" path="res://art/ui/pause_menu.png" id="1_myx47"]
+[ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="2_kukqi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5d2l8"]
+line_spacing = -16.0
+font = ExtResource("2_kukqi")
+font_color = Color(0, 0.837235, 0.837234, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kukqi")
+
+[node name="PauseMenu" type="Sprite2D" parent="."]
+position = Vector2(0, 100)
+scale = Vector2(2, 2)
+texture = ExtResource("1_myx47")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 123.0
+offset_right = 237.0
+offset_bottom = 157.0
+text = "PAUSE"
+label_settings = SubResource("LabelSettings_5d2l8")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 186.0
+offset_right = 235.0
+offset_bottom = 220.0
+text = "RESUME"
+label_settings = SubResource("LabelSettings_5d2l8")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 280.0
+offset_right = 235.0
+offset_bottom = 314.0
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_5d2l8")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 376.0
+offset_right = 262.0
+offset_bottom = 410.0
+text = "LEAVE"
+label_settings = SubResource("LabelSettings_5d2l8")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 169.0
+offset_right = 257.0
+offset_bottom = 228.0
+
+[node name="Button2" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 264.0
+offset_right = 257.0
+offset_bottom = 323.0
+
+[node name="Button3" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 61.0
+offset_top = 358.0
+offset_right = 257.0
+offset_bottom = 417.0
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
