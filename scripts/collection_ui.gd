@@ -24,6 +24,13 @@ var current_page := 0
 
 func _ready() -> void:
 	bullet_detail.visible = false
+	visible = false
+	_refresh_unlocked_balls()
+	update_page()
+func appear():
+	print("opened")
+	$AnimationPlayer.play("appear")
+func setup():
 	_refresh_unlocked_balls()
 	update_page()
 func _refresh_unlocked_balls() -> void:
@@ -86,4 +93,10 @@ func on_ball_pressed(slot_index: int) -> void:
 
 
 func _on_button_7_pressed() -> void:
-	visible = false
+	$AnimationPlayer.play("disappear")
+
+
+
+
+func _on_equip_button_pressed() -> void:
+	pass # Replace with function body.

@@ -1,0 +1,211 @@
+[gd_scene load_steps=14 format=3 uid="uid://c7t0butivf3xh"]
+
+[ext_resource type="Texture2D" uid="uid://dkt2xl31480jb" path="res://art/backgrounds/bg_2.png" id="1_sbo6t"]
+[ext_resource type="Texture2D" uid="uid://c7t6gjc1xev76" path="res://art/background_wide.png" id="2_5tirf"]
+[ext_resource type="Script" uid="uid://bb81nywmk7xd4" path="res://scripts/background.gd" id="3_73ijk"]
+[ext_resource type="Texture2D" uid="uid://dtj1cencm6itg" path="res://art/ui/space_panel.png" id="4_lju1q"]
+[ext_resource type="FontFile" uid="uid://dve7d7c8gx1sf" path="res://font/easvhs.ttf" id="5_bet7a"]
+[ext_resource type="Texture2D" uid="uid://der7248fjodqe" path="res://art/ui/button.png" id="6_xife4"]
+[ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="7_wsifg"]
+[ext_resource type="Script" uid="uid://3ebwrknd31sj" path="res://scripts/money_label.gd" id="8_4caof"]
+[ext_resource type="Texture2D" uid="uid://dmkwug2xetlhc" path="res://art/ui/small_panel.png" id="9_ioy7m"]
+[ext_resource type="PackedScene" uid="uid://dk1vm1ht1rpji" path="res://scenes/collection_menu.tscn" id="10_h8njc"]
+[ext_resource type="Texture2D" uid="uid://tbjtbqnmbcjk" path="res://art/ui/logo.png" id="11_gn2ln"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m3y4h"]
+font = ExtResource("5_bet7a")
+font_size = 17
+outline_size = 8
+outline_color = Color(0.149022, 0.176733, 0.23304, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_52gi2"]
+font = ExtResource("7_wsifg")
+font_color = Color(0, 0.904031, 0.904031, 1)
+outline_size = 8
+outline_color = Color(0, 0.419346, 0.503155, 1)
+
+[node name="main_menu_ui" type="CanvasLayer"]
+layer = 2
+
+[node name="bg_filler" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(161, 344)
+scale = Vector2(2.135, 2.135)
+texture = ExtResource("1_sbo6t")
+
+[node name="bg_stars" type="Sprite2D" parent="."]
+z_index = -1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_5tirf")
+centered = false
+offset = Vector2(-128, -64)
+script = ExtResource("3_73ijk")
+
+[node name="space_panel" type="Sprite2D" parent="."]
+z_index = 4
+position = Vector2(0, 406)
+scale = Vector2(2, 2)
+texture = ExtResource("4_lju1q")
+centered = false
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0.470588)
+z_index = 4
+offset_left = 235.0
+offset_top = 664.0
+offset_right = 348.0
+offset_bottom = 687.0
+scale = Vector2(0.7, 0.7)
+text = "NeonTetra053"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 2
+
+[node name="main_menu_button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 207.0
+offset_right = 214.0
+offset_bottom = 251.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_button"]
+position = Vector2(54, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xife4")
+
+[node name="Label" type="Label" parent="main_menu_button"]
+z_index = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 39.0
+scale = Vector2(0.7, 0.7)
+text = "PLAY"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button_endless" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 258.0
+offset_right = 214.0
+offset_bottom = 302.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_button_endless"]
+position = Vector2(54, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xife4")
+
+[node name="Label" type="Label" parent="main_menu_button_endless"]
+z_index = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 39.0
+scale = Vector2(0.7, 0.7)
+text = "ENDLESS"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button2" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 309.0
+offset_right = 214.0
+offset_bottom = 353.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_button2"]
+position = Vector2(54, 22)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xife4")
+
+[node name="Label" type="Label" parent="main_menu_button2"]
+z_index = 1
+layout_mode = 0
+offset_top = 14.0
+offset_right = 160.0
+offset_bottom = 48.0
+scale = Vector2(0.7, 0.7)
+text = "COLLECTION"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button3" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 363.0
+offset_right = 214.0
+offset_bottom = 407.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_button3"]
+position = Vector2(54, 22)
+scale = Vector2(2, 2)
+texture = ExtResource("6_xife4")
+
+[node name="Label" type="Label" parent="main_menu_button3"]
+modulate = Color(1, 1, 1, 0.24313726)
+z_index = 1
+layout_mode = 0
+offset_left = 10.0
+offset_top = 14.0
+offset_right = 138.0
+offset_bottom = 48.0
+scale = Vector2(0.7, 0.7)
+text = "SETTINGS"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="main_menu_button4" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 3
+offset_left = 106.0
+offset_top = 416.0
+offset_right = 214.0
+offset_bottom = 460.0
+script = ExtResource("8_4caof")
+
+[node name="sprite" type="Sprite2D" parent="main_menu_button4"]
+scale = Vector2(2, 2)
+texture = ExtResource("6_xife4")
+centered = false
+
+[node name="SmallPanel" type="Sprite2D" parent="main_menu_button4"]
+position = Vector2(130, 21)
+scale = Vector2(2, 2)
+texture = ExtResource("9_ioy7m")
+
+[node name="Label" type="Label" parent="main_menu_button4"]
+z_index = 1
+layout_mode = 0
+offset_left = 13.0
+offset_top = 17.0
+offset_right = 181.0
+offset_bottom = 51.0
+scale = Vector2(0.5, 0.5)
+text = "ASTEROID BUSTER"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="main_menu_button4"]
+z_index = 1
+layout_mode = 0
+offset_left = 114.0
+offset_top = 17.0
+offset_right = 170.0
+offset_bottom = 51.0
+scale = Vector2(0.5, 0.5)
+text = "999G"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
+[node name="collection_menu" parent="." instance=ExtResource("10_h8njc")]
+z_index = 9
+offset_top = -23.0
+offset_bottom = -23.0
+
+[node name="logo_sprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(159, 88)
+scale = Vector2(2, 2)
+texture = ExtResource("11_gn2ln")

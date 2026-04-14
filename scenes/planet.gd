@@ -1,7 +1,12 @@
 extends StaticBody2D
 
 @export var gravity_strength: float = 500.0
-@export var radius: float = 200.0
+@export var radius: float = 140
+enum BrickType {
+	RED, PURPLE, YELLOW, GREEN, BLUE, ORANGE_1, ORANGE_2, ENEMY_GREEN, COIN, BOOSTER, EXP, ENEMY_YELLOW, ENEMY_RED, PLANET
+}
+var grid_pos: Vector2i
+var brick_type: int
 
 var bullets_in_area: Array = []
 

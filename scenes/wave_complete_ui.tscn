@@ -1,0 +1,167 @@
+[gd_scene load_steps=15 format=3 uid="uid://n2ojxwpkj67i"]
+
+[ext_resource type="Script" uid="uid://dqha2yvxnq6ne" path="res://scripts/wave_complete_ui.gd" id="1_yxkks"]
+[ext_resource type="Texture2D" uid="uid://c2sj1o6p5chbm" path="res://art/ui/complete_ui.png" id="2_87r6l"]
+[ext_resource type="Texture2D" uid="uid://c4bok0ltp43a0" path="res://art/ui/light_1.png" id="3_sjffb"]
+[ext_resource type="Texture2D" uid="uid://c85af1r5jyxnx" path="res://art/ui/light_2.png" id="4_ko3id"]
+[ext_resource type="Texture2D" uid="uid://dbiulyr85wgs4" path="res://art/ui/light_3.png" id="5_u53w5"]
+[ext_resource type="Texture2D" uid="uid://b6mjr2f11ve5n" path="res://art/ui/light_4.png" id="6_s7g4r"]
+[ext_resource type="Texture2D" uid="uid://21ia460ewsc" path="res://art/ui/light_5.png" id="7_6w0ob"]
+[ext_resource type="Texture2D" uid="uid://4d37hy0kkv3s" path="res://art/ui/light_6.png" id="8_htyxt"]
+[ext_resource type="Texture2D" uid="uid://cnrr2egwpsuyl" path="res://art/ui/light_7.png" id="9_lf1ew"]
+[ext_resource type="FontFile" uid="uid://dve7d7c8gx1sf" path="res://font/easvhs.ttf" id="10_46d02"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xavyk"]
+font = ExtResource("10_46d02")
+font_size = 17
+outline_size = 8
+outline_color = Color(0.149022, 0.176733, 0.23304, 1)
+
+[sub_resource type="Animation" id="Animation_ig0w7"]
+resource_name = "play"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CompleteUi:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(0.5, 1, 2.0000002, 1),
+"update": 0,
+"values": [Vector2(0, -100), Vector2(0, 50), Vector2(0, 50), Vector2(0, 200)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CompleteUi:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(0.5, 1, 2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0stcc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CompleteUi:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CompleteUi:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lc3t8"]
+_data = {
+&"RESET": SubResource("Animation_0stcc"),
+&"play": SubResource("Animation_ig0w7")
+}
+
+[node name="Node2D" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 159.0
+offset_top = 219.0
+offset_right = 159.0
+offset_bottom = 219.0
+scale = Vector2(2, 2)
+script = ExtResource("1_yxkks")
+
+[node name="CompleteUi" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_87r6l")
+
+[node name="Light1" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-45, -31)
+texture = ExtResource("3_sjffb")
+
+[node name="Light2" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-30, -31)
+texture = ExtResource("4_ko3id")
+
+[node name="Light3" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-15, -31)
+texture = ExtResource("5_u53w5")
+
+[node name="Light4" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(0, -31)
+texture = ExtResource("6_s7g4r")
+
+[node name="Light5" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(15, -31)
+texture = ExtResource("7_6w0ob")
+
+[node name="Light6" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(29, -31)
+texture = ExtResource("8_htyxt")
+
+[node name="Light7" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(44, -31)
+texture = ExtResource("9_lf1ew")
+
+[node name="Light8" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-45, 30)
+texture = ExtResource("9_lf1ew")
+
+[node name="Light9" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-30, 30)
+texture = ExtResource("8_htyxt")
+
+[node name="Light10" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(-15, 30)
+texture = ExtResource("7_6w0ob")
+
+[node name="Light11" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(0, 30)
+texture = ExtResource("6_s7g4r")
+
+[node name="Light12" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(15, 30)
+texture = ExtResource("5_u53w5")
+
+[node name="Light13" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(29, 30)
+texture = ExtResource("4_ko3id")
+
+[node name="Light14" type="Sprite2D" parent="CompleteUi"]
+position = Vector2(44, 30)
+texture = ExtResource("3_sjffb")
+
+[node name="Label2" type="Label" parent="CompleteUi"]
+offset_left = -56.874996
+offset_top = -6.875
+offset_right = 120.125
+offset_bottom = 16.125
+scale = Vector2(0.64, 0.64)
+text = "Wave 5 complete!"
+label_settings = SubResource("LabelSettings_xavyk")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lc3t8")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

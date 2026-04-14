@@ -1,0 +1,72 @@
+[gd_scene load_steps=11 format=3 uid="uid://dfndpq6c4rlaw"]
+
+[ext_resource type="Script" uid="uid://brr55crk4l5wd" path="res://scripts/visual_coin.gd" id="1_18xh4"]
+[ext_resource type="Texture2D" uid="uid://dmepyfv88xoq4" path="res://art/objects/coin_sheet.png" id="2_l7njd"]
+[ext_resource type="Texture2D" uid="uid://vsgapxiwe6pc" path="res://art/effects/pop.png" id="3_ibkf0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6r2p"]
+atlas = ExtResource("2_l7njd")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvifh"]
+atlas = ExtResource("2_l7njd")
+region = Rect2(7, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa2t2"]
+atlas = ExtResource("2_l7njd")
+region = Rect2(14, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u5vh"]
+atlas = ExtResource("3_ibkf0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rqxj"]
+atlas = ExtResource("3_ibkf0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6dmb"]
+atlas = ExtResource("3_ibkf0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_siqxe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6r2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvifh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa2t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvifh")
+}],
+"loop": true,
+"name": &"coin",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u5vh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rqxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6dmb")
+}],
+"loop": false,
+"name": &"pop",
+"speed": 15.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_18xh4")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_siqxe")
+animation = &"coin"
+autoplay = "coin"

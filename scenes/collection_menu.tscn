@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dk1vm1ht1rpji"]
+[gd_scene load_steps=27 format=3 uid="uid://dk1vm1ht1rpji"]
 
 [ext_resource type="Script" uid="uid://tp5hfci4x0ki" path="res://scripts/collection_ui.gd" id="1_ofggi"]
 [ext_resource type="Texture2D" uid="uid://uj830d21yxus" path="res://art/ui/collection_menu.png" id="2_lf1v6"]
@@ -13,6 +13,10 @@
 [ext_resource type="Script" uid="uid://dsmqk2xw1u6iu" path="res://scripts/bullet_detail.gd" id="11_8xfkk"]
 [ext_resource type="Shader" uid="uid://cbrf5w440wv2l" path="res://scripts/collection_menu.gdshader" id="11_qqsku"]
 [ext_resource type="Texture2D" uid="uid://c5yg6lsqavagu" path="res://art/ui/bullet_detail_menu.png" id="12_6mnxs"]
+[ext_resource type="Shader" uid="uid://c6f780vqv70sa" path="res://shaders/shine_2.gdshader" id="13_rl0ek"]
+[ext_resource type="Texture2D" uid="uid://dkt2xl31480jb" path="res://art/backgrounds/bg_2.png" id="14_ptk2r"]
+[ext_resource type="Texture2D" uid="uid://c7t6gjc1xev76" path="res://art/background_wide.png" id="15_rl0ek"]
+[ext_resource type="Script" uid="uid://bb81nywmk7xd4" path="res://scripts/background.gd" id="16_htfnb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fmp2"]
 shader = ExtResource("3_1o4rt")
@@ -85,6 +89,138 @@ font_color = Color(0, 0.837235, 0.837234, 1)
 shader = ExtResource("11_qqsku")
 shader_parameter/reveal = 1.0
 
+[sub_resource type="Animation" id="Animation_sny5g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("collection_ui:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_oc5da"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("collection_ui:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_awdyg"]
+resource_name = "disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("collection_ui:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ptk2r"]
+_data = {
+&"RESET": SubResource("Animation_sny5g"),
+&"appear": SubResource("Animation_oc5da"),
+&"disappear": SubResource("Animation_awdyg")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rl0ek"]
+shader = ExtResource("13_rl0ek")
+shader_parameter/cyan_tint = Color(0, 0.9, 0.9, 0.1)
+shader_parameter/scanline_speed = 0.1
+shader_parameter/static_speed = 10.0
+shader_parameter/line_density = 600.0
+shader_parameter/jitter_amount = 0.002
+
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -96,8 +232,9 @@ script = ExtResource("1_ofggi")
 
 [node name="collection_ui" type="Control" parent="."]
 anchors_preset = 0
+offset_top = 1.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 41.0
 
 [node name="sprite" type="AnimatedSprite2D" parent="collection_ui"]
 z_index = 1
@@ -282,7 +419,6 @@ offset_right = 194.0
 offset_bottom = 548.0
 
 [node name="bullet_detail" type="Control" parent="."]
-visible = false
 clip_children = 1
 z_index = 1
 clip_contents = true
@@ -530,21 +666,40 @@ autowrap_mode = 2
 
 [node name="buttons_label" type="Label" parent="bullet_detail/TextureRect"]
 layout_mode = 0
-offset_left = 58.0
+offset_left = 132.0
 offset_top = 526.0
-offset_right = 250.0
+offset_right = 324.0
 offset_bottom = 560.0
 scale = Vector2(1.1, 1.1)
-text = "        [exit]        "
+text = "[exit]        "
 label_settings = SubResource("LabelSettings_p5wsa")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="bullet_detail/TextureRect"]
+[node name="buttons_label2" type="Label" parent="bullet_detail/TextureRect"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 526.0
+offset_right = 211.0
+offset_bottom = 560.0
+scale = Vector2(1.1, 1.1)
+text = "[equip]        "
+label_settings = SubResource("LabelSettings_p5wsa")
+horizontal_alignment = 1
+
+[node name="exit_button" type="Button" parent="bullet_detail/TextureRect"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 129.0
+offset_left = 186.0
 offset_top = 524.0
-offset_right = 194.0
+offset_right = 251.0
+offset_bottom = 548.0
+
+[node name="equip_button" type="Button" parent="bullet_detail/TextureRect"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 55.0
+offset_top = 524.0
+offset_right = 159.0
 offset_bottom = 548.0
 
 [node name="buy_button_1" type="Button" parent="bullet_detail/TextureRect"]
@@ -571,7 +726,36 @@ offset_top = 482.0
 offset_right = 282.0
 offset_bottom = 512.0
 
-[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ptk2r")
+}
+
+[node name="bg_filler" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+z_index = -2
+position = Vector2(161, 349)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("14_ptk2r")
+
+[node name="bg_stars" type="Sprite2D" parent="."]
+z_index = -3
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("15_rl0ek")
+centered = false
+offset = Vector2(-128, -64)
+script = ExtResource("16_htfnb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
+material = SubResource("ShaderMaterial_rl0ek")
+layout_mode = 0
+offset_left = 16.0
+offset_top = 118.0
+offset_right = 304.0
+offset_bottom = 566.0
+mouse_filter = 2
+
 [connection signal="pressed" from="collection_ui/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="collection_ui/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="collection_ui/Button3" to="." method="_on_button_3_pressed"]
@@ -579,7 +763,8 @@ offset_bottom = 512.0
 [connection signal="pressed" from="collection_ui/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="pressed" from="collection_ui/Button6" to="." method="_on_button_6_pressed"]
 [connection signal="pressed" from="collection_ui/Button7" to="." method="_on_button_7_pressed"]
-[connection signal="pressed" from="bullet_detail/TextureRect/Button" to="bullet_detail" method="_on_button_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/exit_button" to="bullet_detail" method="_on_button_pressed"]
+[connection signal="pressed" from="bullet_detail/TextureRect/equip_button" to="bullet_detail" method="_on_equip_button_pressed"]
 [connection signal="pressed" from="bullet_detail/TextureRect/buy_button_1" to="bullet_detail" method="_on_buy_button_1_pressed"]
 [connection signal="pressed" from="bullet_detail/TextureRect/buy_button_2" to="bullet_detail" method="_on_buy_button_2_pressed"]
 [connection signal="pressed" from="bullet_detail/TextureRect/buy_button_3" to="bullet_detail" method="_on_buy_button_3_pressed"]

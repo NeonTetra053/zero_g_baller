@@ -1,14 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://c283suwmah4rf"]
+[gd_scene load_steps=15 format=3 uid="uid://c283suwmah4rf"]
 
 [ext_resource type="Script" uid="uid://blsx2qfggpytc" path="res://scripts/bullet.gd" id="1_75hke"]
 [ext_resource type="Texture2D" uid="uid://d2qirrbwtfxk1" path="res://art/bullets/basic_bullet.png" id="2_hsbe2"]
 [ext_resource type="Texture2D" uid="uid://c70gw3asxwv4q" path="res://art/bullets/heavy_bullet.png" id="3_6h043"]
+[ext_resource type="Texture2D" uid="uid://c7bj6ofpxrqsa" path="res://art/bullets/fire_bullet.png" id="3_k76ql"]
 [ext_resource type="Texture2D" uid="uid://didj0dcqrqqrf" path="res://art/bullets/icy_bullet.png" id="4_hls4v"]
 [ext_resource type="Texture2D" uid="uid://cmwu5q7v6x6ro" path="res://art/bullets/light_bullet.png" id="5_wh3q3"]
 [ext_resource type="Texture2D" uid="uid://6xmoob4fuemu" path="res://art/bullets/nano_shot.png" id="6_nc2hd"]
 [ext_resource type="Texture2D" uid="uid://c2k56ah13r2oe" path="res://art/bullets/shock_bullet.png" id="7_ndeyi"]
+[ext_resource type="Texture2D" uid="uid://cay14wfmnv7j6" path="res://art/effects/particle_1.png" id="8_1cfmv"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_r8i3w"]
+friction = 0.0
 bounce = 1.1
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e0bgm"]
@@ -24,6 +27,14 @@ animations = [{
 "frames": [],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_k76ql")
+}],
+"loop": true,
+"name": &"fire",
 "speed": 5.0
 }, {
 "frames": [{
@@ -70,12 +81,22 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_e08b2"]
 radius = 8.0
 
+[sub_resource type="Curve" id="Curve_26lx3"]
+_data = [Vector2(0.55813956, 0.764045), 0.0, 0.0, 0, 0, Vector2(0.9302326, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_1cfmv"]
+offsets = PackedFloat32Array(0, 0.23287672, 0.55479455, 1)
+colors = PackedColorArray(1, 0.5742905, 0.2972082, 1, 1, 0.87353736, 0.12107197, 1, 1, 0.95556635, 0.6221324, 1, 1, 1, 1, 1)
+
 [node name="Node2D" type="RigidBody2D"]
 rotation = 1.5708
+scale = Vector2(2.035, 2.035)
 mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_r8i3w")
 gravity_scale = 0.0
 can_sleep = false
+lock_rotation = true
 continuous_cd = 2
 linear_damp = 1.0
 script = ExtResource("1_75hke")
@@ -83,13 +104,13 @@ script = ExtResource("1_75hke")
 [node name="sprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
 position = Vector2(0, 2.27374e-13)
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_e0bgm")
-animation = &"nano"
+animation = &"basic"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2.27374e-13)
-scale = Vector2(0.4, 0.4)
+position = Vector2(0, -2.2737395e-13)
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_e08b2")
 
 [node name="Timer" type="Timer" parent="."]
@@ -125,8 +146,8 @@ lifetime = 0.2
 direction = Vector2(0, 0)
 spread = 0.0
 gravity = Vector2(0, 0)
-scale_amount_min = 1.5
-scale_amount_max = 1.5
+scale_amount_min = 1.2
+scale_amount_max = 1.2
 
 [node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
 position = Vector2(0, -2.27374e-13)
@@ -140,5 +161,21 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 10.0
 initial_velocity_max = 50.0
 
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="."]
+rotation = -1.5707964
+emitting = false
+amount = 45
+texture = ExtResource("8_1cfmv")
+lifetime = 1.7
+one_shot = true
+speed_scale = 5.0
+explosiveness = 1.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 50.0
+scale_amount_curve = SubResource("Curve_26lx3")
+color_initial_ramp = SubResource("Gradient_1cfmv")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

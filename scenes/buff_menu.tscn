@@ -1,0 +1,302 @@
+[gd_scene load_steps=20 format=3 uid="uid://doawujsqc6h68"]
+
+[ext_resource type="Script" uid="uid://bsympgsyaipbr" path="res://scripts/buff_menu.gd" id="1_o88yd"]
+[ext_resource type="Texture2D" uid="uid://hgbcijsaje3n" path="res://art/ui/buff_menu.png" id="2_gifg3"]
+[ext_resource type="Shader" uid="uid://c6f780vqv70sa" path="res://shaders/shine_2.gdshader" id="2_pcis1"]
+[ext_resource type="Texture2D" uid="uid://b4uobnqi8vkg" path="res://art/ui/buff_icon3.png" id="3_pcis1"]
+[ext_resource type="Texture2D" uid="uid://dn5g53t0w4hwb" path="res://art/ui/buff_icon2.png" id="4_vvw6x"]
+[ext_resource type="Texture2D" uid="uid://bwx00tklsgqbp" path="res://art/ui/buff_icon1.png" id="5_j30ul"]
+[ext_resource type="Texture2D" uid="uid://dj2gds3iwia82" path="res://art/ui/buff_icon4.png" id="6_gfun8"]
+[ext_resource type="Texture2D" uid="uid://8w66baj4f23a" path="res://art/ui/buff_icon6.png" id="6_j30ul"]
+[ext_resource type="Texture2D" uid="uid://cs2ydd6f0uc7s" path="res://art/ui/buff_select.png" id="7_45gym"]
+[ext_resource type="Texture2D" uid="uid://cd7ch8ildqwr5" path="res://art/ui/buff_icon5.png" id="7_gfun8"]
+[ext_resource type="Texture2D" uid="uid://c733gmkq238v" path="res://art/ui/buff_icon7.png" id="8_gfun8"]
+[ext_resource type="Shader" uid="uid://jlpmxoabrleq" path="res://shaders/blur.gdshader" id="8_gifg3"]
+[ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="8_pyboe"]
+[ext_resource type="Texture2D" uid="uid://bf6d0hi05woy8" path="res://art/ui/buff_icon8.png" id="12_45gym"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gifg3"]
+shader = ExtResource("8_gifg3")
+shader_parameter/glow_color = Color(0, 1, 1, 1)
+shader_parameter/radius = 1.0
+shader_parameter/intensity = 1.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eq184"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pcis1")
+}],
+"loop": true,
+"name": &"damp_minus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_j30ul")
+}],
+"loop": true,
+"name": &"dmg_plus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_gfun8")
+}],
+"loop": true,
+"name": &"hp_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_gfun8")
+}],
+"loop": true,
+"name": &"range_plus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vvw6x")
+}],
+"loop": true,
+"name": &"size_minus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j30ul")
+}],
+"loop": true,
+"name": &"size_plus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_gfun8")
+}],
+"loop": true,
+"name": &"speed_plus",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_45gym")
+}],
+"loop": true,
+"name": &"star_icon",
+"speed": 5.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pcis1"]
+shader = ExtResource("8_gifg3")
+shader_parameter/glow_color = Color(0, 1, 1, 1)
+shader_parameter/radius = 1.0
+shader_parameter/intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_45gym"]
+shader = ExtResource("2_pcis1")
+shader_parameter/cyan_tint = Color(0, 0.9, 0.9, 0.1)
+shader_parameter/scanline_speed = 0.1
+shader_parameter/static_speed = 10.0
+shader_parameter/line_density = 400.000018525
+shader_parameter/jitter_amount = 0.002
+
+[sub_resource type="LabelSettings" id="LabelSettings_ggfps"]
+line_spacing = -16.0
+font = ExtResource("8_pyboe")
+font_color = Color(0, 0.837235, 0.837234, 1)
+outline_size = 3
+outline_color = Color(0, 0.44907063, 0.47466534, 1)
+
+[node name="buff_menu" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o88yd")
+
+[node name="BuffMenu" type="Sprite2D" parent="."]
+position = Vector2(161.00002, 390.00003)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("2_gifg3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BuffMenu"]
+material = SubResource("ShaderMaterial_gifg3")
+position = Vector2(-43.8889, -41.11113)
+sprite_frames = SubResource("SpriteFrames_eq184")
+animation = &"star_icon"
+autoplay = "default"
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="BuffMenu"]
+material = SubResource("ShaderMaterial_pcis1")
+position = Vector2(-8.821487e-06, -41.11113)
+sprite_frames = SubResource("SpriteFrames_eq184")
+animation = &"range_plus"
+autoplay = "default"
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="BuffMenu"]
+material = SubResource("ShaderMaterial_pcis1")
+position = Vector2(43.888885, -41.11113)
+sprite_frames = SubResource("SpriteFrames_eq184")
+animation = &"speed_plus"
+autoplay = "default"
+
+[node name="BuffSelect" type="Sprite2D" parent="BuffMenu"]
+visible = false
+material = SubResource("ShaderMaterial_pcis1")
+position = Vector2(-43.888897, -41.11112)
+texture = ExtResource("7_45gym")
+
+[node name="BuffSelect2" type="Sprite2D" parent="BuffMenu"]
+visible = false
+material = SubResource("ShaderMaterial_pcis1")
+position = Vector2(-7.6293945e-06, -41.11112)
+texture = ExtResource("7_45gym")
+
+[node name="BuffSelect3" type="Sprite2D" parent="BuffMenu"]
+visible = false
+material = SubResource("ShaderMaterial_pcis1")
+position = Vector2(43.88888, -41.11112)
+texture = ExtResource("7_45gym")
+
+[node name="ColorRect" type="ColorRect" parent="BuffMenu"]
+z_index = 2
+material = SubResource("ShaderMaterial_45gym")
+offset_left = -72.22224
+offset_top = -112.222244
+offset_right = 71.66665
+offset_bottom = 31.666641
+mouse_filter = 2
+
+[node name="title_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 197.0
+offset_right = 243.0
+offset_bottom = 231.0
+scale = Vector2(0.9, 0.9)
+text = "Select a buff"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="title_label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 220.0
+offset_right = 467.0
+offset_bottom = 254.0
+scale = Vector2(0.5, 0.5)
+text = "click a buff icon, then click again to confirm"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="selected_buff_name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 364.0
+offset_right = 250.0
+offset_bottom = 398.0
+scale = Vector2(0.8, 0.8)
+text = "Select a buff"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="selected_buff_description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 40.999996
+offset_top = 389.0
+offset_right = 446.0
+offset_bottom = 502.74997
+scale = Vector2(0.6, 0.6)
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="buff_name_1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 270.0
+offset_right = 202.0
+offset_bottom = 304.0
+scale = Vector2(0.5, 0.5)
+text = "larger barrel"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="buff_name_2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 270.0
+offset_right = 280.0
+offset_bottom = 304.0
+scale = Vector2(0.5, 0.5)
+text = "larger barrel"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="buff_name_3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 201.0
+offset_top = 270.0
+offset_right = 359.0
+offset_bottom = 304.0
+scale = Vector2(0.5, 0.5)
+text = "larger barrel"
+label_settings = SubResource("LabelSettings_ggfps")
+horizontal_alignment = 1
+
+[node name="buff_button_1" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 51.0
+offset_top = 285.0
+offset_right = 112.0
+offset_bottom = 347.0
+
+[node name="buff_button_2" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 130.0
+offset_top = 285.0
+offset_right = 191.0
+offset_bottom = 347.0
+
+[node name="buff_button_3" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 209.0
+offset_top = 285.0
+offset_right = 270.0
+offset_bottom = 347.0
+
+[node name="cancel_button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 265.0
+offset_top = 192.0
+offset_right = 287.0
+offset_bottom = 215.0
+
+[connection signal="focus_entered" from="buff_button_1" to="." method="_on_buff_button_1_focus_entered"]
+[connection signal="focus_exited" from="buff_button_1" to="." method="_on_buff_button_1_focus_exited"]
+[connection signal="mouse_entered" from="buff_button_1" to="." method="_on_buff_button_1_mouse_entered"]
+[connection signal="mouse_exited" from="buff_button_1" to="." method="_on_buff_button_1_mouse_exited"]
+[connection signal="pressed" from="buff_button_1" to="." method="_on_buff_button_1_pressed"]
+[connection signal="mouse_entered" from="buff_button_2" to="." method="_on_buff_button_2_mouse_entered"]
+[connection signal="mouse_exited" from="buff_button_2" to="." method="_on_buff_button_2_mouse_exited"]
+[connection signal="pressed" from="buff_button_2" to="." method="_on_buff_button_2_pressed"]
+[connection signal="mouse_entered" from="buff_button_3" to="." method="_on_buff_button_3_mouse_entered"]
+[connection signal="mouse_exited" from="buff_button_3" to="." method="_on_buff_button_3_mouse_exited"]
+[connection signal="pressed" from="buff_button_3" to="." method="_on_buff_button_3_pressed"]
+[connection signal="pressed" from="cancel_button" to="." method="_on_cancel_button_pressed"]

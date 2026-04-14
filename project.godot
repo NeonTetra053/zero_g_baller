@@ -37,6 +37,10 @@ project/assembly_name="mobilest game"
 
 pointing/emulate_touch_from_mouse=true
 
+[physics]
+
+common/physics_ticks_per_second=200
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

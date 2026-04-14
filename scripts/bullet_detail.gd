@@ -8,7 +8,7 @@ extends Control
 @onready var stability_label = $TextureRect/stability_label
 @onready var desc_label = $TextureRect/desc_info
 @onready var panel = $TextureRect
-
+@onready var equipped_label = $TextureRect/buttons_label2
 @onready var upgrade_names = [
 $TextureRect/upgrade_name_1, $TextureRect/upgrade_name_2, $TextureRect/upgrade_name_3
 ]
@@ -166,7 +166,10 @@ var current_bullet_id: String = ""
 func show_bullet(bullet_id: String):
 	current_bullet_id = bullet_id  # store it for upgrades
 	var data = BULLET_STATS[bullet_id]
-	
+	if Game.player_stats.equipped_bullet == bullet_id:
+		equipped_label.text = "EQUIPPED"
+	else:
+		equipped_label.text = "EQUIP"
 	sprite.play(data.anim)
 	name_label.text = data.name
 	speed_label.text = "Speed: x%.1f" % data.speed
@@ -248,3 +251,16 @@ func _on_buy_button_2_pressed() -> void:
 
 func _on_buy_button_3_pressed() -> void:
 	_buy_upgrade(2)
+
+
+func _on_equip_button_pressed() -> void:
+	if current_bullet_id == "":
+		return
+		
+	# Update the global stats [cite: 48]
+	Game.player_stats.equip_bullet(current_bullet_id)
+	Game.save_stats()
+	
+	# Update the label to show it is now equipped [cite: 39]
+	equipped_label.text = "EQUIPPED" 
+	print("Equipped bullet: ", current_bullet_id)

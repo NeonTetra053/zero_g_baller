@@ -12,6 +12,7 @@ const exp_requirement = [
 @export var exp: int = 0
 @export var highest_stage: int = 1
 @export var current_stage: int = 1
+@export var equipped_bullet: String = "BASIC"
 @export var bullet_upgrades := {
 	"BASIC": {
 		"Propulsion": 0,
@@ -98,3 +99,5 @@ func upgrade_bullet(bullet_id: String, upgrade_id: String) -> bool:
 
 	bullet_upgrades[bullet_id][upgrade_id] += 1
 	return true
+func equip_bullet(bullet_id: String):
+	equipped_bullet = bullet_id.to_upper() # [cite: 56]

@@ -1,0 +1,323 @@
+[gd_scene load_steps=24 format=3 uid="uid://c8wkbaviwreb1"]
+
+[ext_resource type="Script" uid="uid://kvahgqh2tsyp" path="res://scripts/game_over_ui.gd" id="1_cotc0"]
+[ext_resource type="Texture2D" uid="uid://dibb5da2hox6i" path="res://art/ui/lost_screen.png" id="2_cotc0"]
+[ext_resource type="Texture2D" uid="uid://c4bok0ltp43a0" path="res://art/ui/light_1.png" id="3_f66cv"]
+[ext_resource type="Texture2D" uid="uid://by22oun0jsajo" path="res://art/enemy/explosion.png" id="6_v8dr6"]
+[ext_resource type="Texture2D" uid="uid://xqbuxbhuo4qo" path="res://art/effects/light.png" id="7_eecca"]
+[ext_resource type="FontFile" uid="uid://dve7d7c8gx1sf" path="res://font/easvhs.ttf" id="10_8g28r"]
+[ext_resource type="Texture2D" uid="uid://der7248fjodqe" path="res://art/ui/button.png" id="11_6k6bx"]
+
+[sub_resource type="Animation" id="Animation_ig0w7"]
+resource_name = "play"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lc3t8"]
+_data = {
+&"play": SubResource("Animation_ig0w7")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_5bb4p"]
+font = ExtResource("10_8g28r")
+font_size = 17
+font_color = Color(0.81, 0.16199999, 0.17279984, 1)
+outline_size = 4
+outline_color = Color(0.33, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xavyk"]
+font = ExtResource("10_8g28r")
+font_size = 17
+outline_size = 8
+outline_color = Color(0.149022, 0.176733, 0.23304, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v8dr6"]
+font = ExtResource("10_8g28r")
+font_size = 17
+font_color = Color(0.81, 0.16199999, 0.17279984, 1)
+outline_size = 4
+outline_color = Color(0.33, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uv1gw"]
+font = ExtResource("10_8g28r")
+font_size = 17
+font_color = Color(0, 0.904031, 0.904031, 1)
+outline_size = 8
+outline_color = Color(0, 0.419346, 0.503155, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmccl"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_er1p3"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dey17"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfrt5"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0lbe"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lbpo"]
+atlas = ExtResource("6_v8dr6")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7own1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmccl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_er1p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dey17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfrt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0lbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lbpo")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"explode",
+"speed": 12.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_r5fbp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vqijj"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gb0kn"]
+_data = {
+&"RESET": SubResource("Animation_r5fbp"),
+&"appear": SubResource("Animation_vqijj")
+}
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 159.0
+offset_top = 219.0
+offset_right = 159.0
+offset_bottom = 219.0
+scale = Vector2(2, 2)
+script = ExtResource("1_cotc0")
+
+[node name="CompleteUi" type="Sprite2D" parent="."]
+texture = ExtResource("2_cotc0")
+
+[node name="Light1" type="Sprite2D" parent="."]
+position = Vector2(-49, -26)
+texture = ExtResource("3_f66cv")
+
+[node name="Light2" type="Sprite2D" parent="."]
+position = Vector2(-34, -28)
+texture = ExtResource("3_f66cv")
+
+[node name="Light3" type="Sprite2D" parent="."]
+position = Vector2(-19, -29)
+texture = ExtResource("3_f66cv")
+
+[node name="Light4" type="Sprite2D" parent="."]
+position = Vector2(-4, -31)
+texture = ExtResource("3_f66cv")
+
+[node name="Light5" type="Sprite2D" parent="."]
+position = Vector2(11, -32)
+texture = ExtResource("3_f66cv")
+
+[node name="Light6" type="Sprite2D" parent="."]
+position = Vector2(26, -33)
+texture = ExtResource("3_f66cv")
+
+[node name="Light7" type="Sprite2D" parent="."]
+position = Vector2(41, -35)
+texture = ExtResource("3_f66cv")
+
+[node name="Light8" type="Sprite2D" parent="."]
+position = Vector2(-44, 35)
+texture = ExtResource("3_f66cv")
+
+[node name="Light9" type="Sprite2D" parent="."]
+position = Vector2(-29, 33)
+texture = ExtResource("3_f66cv")
+
+[node name="Light10" type="Sprite2D" parent="."]
+position = Vector2(-14, 32)
+texture = ExtResource("3_f66cv")
+
+[node name="Light11" type="Sprite2D" parent="."]
+position = Vector2(1, 30)
+texture = ExtResource("3_f66cv")
+
+[node name="Light12" type="Sprite2D" parent="."]
+position = Vector2(16, 29)
+texture = ExtResource("3_f66cv")
+
+[node name="Light13" type="Sprite2D" parent="."]
+position = Vector2(31, 28)
+texture = ExtResource("3_f66cv")
+
+[node name="Light14" type="Sprite2D" parent="."]
+position = Vector2(46, 26)
+texture = ExtResource("3_f66cv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lc3t8")
+}
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = -50.499996
+offset_top = -6.82547
+offset_right = 74.5
+offset_bottom = 16.17453
+rotation = -0.09689689
+scale = Vector2(0.8, 0.8)
+text = "Mission failed..."
+label_settings = SubResource("LabelSettings_5bb4p")
+horizontal_alignment = 1
+
+[node name="collected_label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -50.0
+offset_top = 19.5
+offset_right = 207.0
+offset_bottom = 43.5
+rotation = -0.09773844
+scale = Vector2(0.4, 0.4)
+text = "collected 10 coins"
+label_settings = SubResource("LabelSettings_xavyk")
+horizontal_alignment = 1
+
+[node name="reward_label" type="Label" parent="."]
+layout_mode = 0
+offset_left = -51.5
+offset_top = 10.67453
+offset_right = 205.5
+offset_bottom = 34.67453
+rotation = -0.09773844
+scale = Vector2(0.4, 0.4)
+text = "The defense has been destoyed"
+label_settings = SubResource("LabelSettings_v8dr6")
+horizontal_alignment = 1
+
+[node name="next_stage_button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 3
+layout_mode = 0
+offset_left = -37.0
+offset_top = 60.0
+offset_right = 45.0
+offset_bottom = 94.0
+
+[node name="Button" type="Sprite2D" parent="next_stage_button"]
+z_index = -1
+position = Vector2(-3.5, 2.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("11_6k6bx")
+centered = false
+
+[node name="next" type="Label" parent="next_stage_button"]
+layout_mode = 0
+offset_left = -27.5
+offset_top = 14.5
+offset_right = 229.5
+offset_bottom = 51.5
+scale = Vector2(0.5, 0.5)
+text = "MAIN MENU
+"
+label_settings = SubResource("LabelSettings_uv1gw")
+horizontal_alignment = 1
+
+[node name="sprite" type="AnimatedSprite2D" parent="."]
+z_index = 2
+sprite_frames = SubResource("SpriteFrames_7own1")
+animation = &"explode"
+autoplay = "new_animation"
+frame = 6
+frame_progress = 1.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="sprite"]
+visible = false
+z_index = 2
+color = Color(0, 0.590648, 0.44425, 1)
+texture = ExtResource("7_eecca")
+texture_scale = 0.15
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_gb0kn")
+}
+
+[connection signal="pressed" from="next_stage_button" to="." method="_on_next_stage_button_pressed"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cb7s8wq1hdo2g"]
+
+[ext_resource type="Script" uid="uid://imvk7e2xa7kc" path="res://scripts/power_star.gd" id="1_8d8bx"]
+[ext_resource type="Texture2D" uid="uid://dsgh0fnp6fjxk" path="res://art/objects/star.png" id="2_8lrp4"]
+[ext_resource type="Texture2D" uid="uid://dr612uuvixwx1" path="res://art/objects/star_mini.png" id="3_sxbdi"]
+[ext_resource type="Texture2D" uid="uid://xqbuxbhuo4qo" path="res://art/effects/light.png" id="4_pexwv"]
+
+[sub_resource type="Curve" id="Curve_fi7gj"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0.0116279125, 0.123595476), 0.0, 0.0, 0, 0, Vector2(0.9709303, 0.46067417), 2.5767794, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwpl5"]
+radius = 18.439089
+
+[node name="Node2D" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_8d8bx")
+speed = 300.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_8lrp4")
+offset = Vector2(0, -0.425)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+texture = ExtResource("3_sxbdi")
+direction = Vector2(1, -2)
+spread = 30.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 164.95
+initial_velocity_max = 164.95
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+hue_variation_min = -0.13
+hue_variation_max = 0.92
+hue_variation_curve = SubResource("Curve_fi7gj")
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(0.9333333, 1, 0, 0.34901962)
+z_index = 1
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("4_pexwv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cwpl5")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://j6wqw7n82fku"]
 
-[ext_resource type="Script" path="res://scripts/complete_menu.gd" id="1_j5wgo"]
+[ext_resource type="Script" uid="uid://jy6ak158n88" path="res://scripts/complete_menu.gd" id="1_j5wgo"]
 [ext_resource type="Texture2D" uid="uid://c2sj1o6p5chbm" path="res://art/ui/complete_ui.png" id="2_qmsby"]
 [ext_resource type="Texture2D" uid="uid://c4bok0ltp43a0" path="res://art/ui/light_1.png" id="3_v7pa5"]
 [ext_resource type="Texture2D" uid="uid://c85af1r5jyxnx" path="res://art/ui/light_2.png" id="4_6yena"]
@@ -17,7 +17,7 @@ resource_name = "play"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lc3t8"]
 _data = {
-"play": SubResource("Animation_ig0w7")
+&"play": SubResource("Animation_ig0w7")
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_xavyk"]
@@ -34,6 +34,7 @@ outline_size = 8
 outline_color = Color(0, 0.419346, 0.503155, 1)
 
 [node name="Node2D" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 159.0
@@ -104,7 +105,7 @@ texture = ExtResource("3_v7pa5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lc3t8")
+&"": SubResource("AnimationLibrary_lc3t8")
 }
 
 [node name="Label2" type="Label" parent="."]

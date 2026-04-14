@@ -14,18 +14,28 @@ func spin():
 		await get_tree().create_timer(0.01).timeout
 func load_bullets(bullet_array):
 	$Chamber2.rotation_degrees = 2
-	print("loading bullets")
+	
 	for i in 6:
-		chamber_bullets[i].visible = true
-		print("bullet: ", bullet_array[i])
-		match bullet_array[i]:
-			1:
-				chamber_bullets[i].play("basic")
-			2:
-				chamber_bullets[i].play("light")
-			3:
-				chamber_bullets[i].play("heavy")
-			4:
-				chamber_bullets[i].play("icy")
-			0:
-				chamber_bullets[i].play("blank")
+		# Check if this index actually exists in the incoming array
+		if i < bullet_array.size():
+			chamber_bullets[i].visible = true
+			
+			match bullet_array[i]:
+				1:
+					chamber_bullets[i].play("basic")
+				2:
+					chamber_bullets[i].play("light")
+				3:
+					chamber_bullets[i].play("heavy")
+				4:
+					chamber_bullets[i].play("icy")
+				5:
+					chamber_bullets[i].play("shock")
+				6:
+					chamber_bullets[i].play("nano")
+				0:
+					chamber_bullets[i].play("blank")
+		else:
+			# If the array is smaller than 6, make the remaining slots blank or invisible
+			chamber_bullets[i].play("blank") 
+			# Or use: chamber_bullets[i].visible = false

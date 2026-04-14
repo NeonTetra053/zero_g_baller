@@ -1,7 +1,7 @@
 [gd_scene load_steps=256 format=3 uid="uid://djyow4rglv73l"]
 
 [ext_resource type="Texture2D" uid="uid://40pq41u2yiu4" path="res://art/objects/113975848.png" id="1_mjx0e"]
-[ext_resource type="Script" path="res://scenes/planet.gd" id="1_q72so"]
+[ext_resource type="Script" uid="uid://bhb2rn04uq21q" path="res://scenes/planet.gd" id="1_q72so"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_56ux4"]
 atlas = ExtResource("1_mjx0e")
@@ -1762,24 +1762,28 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_afd72"]
-radius = 40.05
+radius = 28.071337
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a4a5a"]
-radius = 81.0062
+radius = 87.005745
 
 [node name="Node2D" type="StaticBody2D"]
 script = ExtResource("1_q72so")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(18.599997, 0)
+scale = Vector2(0.84, 0.84)
 sprite_frames = SubResource("SpriteFrames_y1kjb")
 animation = &"new_animation"
 autoplay = "new_animation"
 frame_progress = 0.115778
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(18.599998, 0)
 shape = SubResource("CircleShape2D_afd72")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(18.599998, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_a4a5a")

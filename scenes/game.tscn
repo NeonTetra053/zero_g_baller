@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://got3cf20dx3o"]
+[gd_scene load_steps=59 format=3 uid="uid://got3cf20dx3o"]
 
 [ext_resource type="Script" uid="uid://dm84y3nhtj7gc" path="res://scripts/game.gd" id="1_1vysj"]
 [ext_resource type="Script" uid="uid://bq1qabdgfjpsn" path="res://scripts/game_elements.gd" id="2_pl11u"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c7t6gjc1xev76" path="res://art/background_wide.png" id="3_a2str"]
 [ext_resource type="Script" uid="uid://bb81nywmk7xd4" path="res://scripts/background.gd" id="4_b1y07"]
 [ext_resource type="Script" uid="uid://4wk2fhu6q2gg" path="res://scripts/ui.gd" id="5_ep3n4"]
-[ext_resource type="Texture2D" uid="uid://dtj1cencm6itg" path="res://art/ui/space_panel.png" id="5_pstqy"]
+[ext_resource type="Script" uid="uid://dnq55ntnnqd1v" path="res://scripts/endless_mode.gd" id="5_qouja"]
 [ext_resource type="PackedScene" uid="uid://tk366ojn3iso" path="res://scenes/chamber.tscn" id="6_6byn1"]
 [ext_resource type="PackedScene" uid="uid://brqo3ic6l4oqb" path="res://scenes/hp_bar_player.tscn" id="7_jn0vj"]
 [ext_resource type="Texture2D" uid="uid://der7248fjodqe" path="res://art/ui/button.png" id="7_mafw4"]
@@ -17,13 +17,30 @@
 [ext_resource type="Texture2D" uid="uid://cairwtvnsdmdo" path="res://art/top_ui.png" id="10_bpsgb"]
 [ext_resource type="FontFile" uid="uid://bcfmixrojf6th" path="res://font/FiveFontsatFreddy's-Regular.ttf" id="10_e1j6l"]
 [ext_resource type="Texture2D" uid="uid://bm3g8bno4cvh0" path="res://art/coin.png" id="11_11c4y"]
+[ext_resource type="Texture2D" uid="uid://q0whth7n0uq2" path="res://art/ui/eye_icon2.png" id="11_v2yb1"]
 [ext_resource type="FontFile" uid="uid://dve7d7c8gx1sf" path="res://font/easvhs.ttf" id="12_e7s3i"]
+[ext_resource type="Texture2D" uid="uid://c15ykq84ubq1w" path="res://art/ui/eye_icon1.png" id="12_js0lu"]
+[ext_resource type="Texture2D" uid="uid://dxlx8rrcl7c6r" path="res://art/ui/buttons/pos_icon_1.png" id="13_7025r"]
 [ext_resource type="Texture2D" uid="uid://tbjtbqnmbcjk" path="res://art/ui/logo.png" id="13_bhx41"]
+[ext_resource type="Script" uid="uid://chsgmx5nnr28p" path="res://scripts/power_bar.gd" id="13_sww3w"]
 [ext_resource type="Texture2D" uid="uid://x7so5167y5f8" path="res://art/pause.png" id="13_visnf"]
 [ext_resource type="Script" uid="uid://cs3noli375xtu" path="res://scripts/level.gd" id="14_5jk8s"]
+[ext_resource type="Texture2D" uid="uid://dlc00edarala" path="res://art/ui/buttons/pos_icon_2.png" id="14_m4url"]
+[ext_resource type="Texture2D" uid="uid://ersxsiy0u2s8" path="res://art/grid.png" id="14_sgl2t"]
 [ext_resource type="PackedScene" uid="uid://j6wqw7n82fku" path="res://scenes/complete_ui.tscn" id="15_7gt47"]
+[ext_resource type="Texture2D" uid="uid://y285atmaf3mx" path="res://art/ui/buttons/pos_icon_3.png" id="15_8ool0"]
 [ext_resource type="Texture2D" uid="uid://dfvuc5s4i4pin" path="res://art/border.png" id="15_oub8e"]
+[ext_resource type="Texture2D" uid="uid://dmkwug2xetlhc" path="res://art/ui/small_panel.png" id="17_qnb83"]
+[ext_resource type="Script" uid="uid://3ebwrknd31sj" path="res://scripts/money_label.gd" id="17_sww3w"]
+[ext_resource type="Texture2D" uid="uid://xqbuxbhuo4qo" path="res://art/effects/light.png" id="22_8ool0"]
+[ext_resource type="Texture2D" uid="uid://cay14wfmnv7j6" path="res://art/effects/particle_1.png" id="22_m4url"]
 [ext_resource type="PackedScene" uid="uid://uf70nd2u4yd8" path="res://scenes/pause_menu.tscn" id="24_bhx41"]
+[ext_resource type="Shader" uid="uid://d1f66r0lceke2" path="res://shaders/shine.gdshader" id="24_twgab"]
+[ext_resource type="PackedScene" uid="uid://doawujsqc6h68" path="res://scenes/buff_menu.tscn" id="25_gxtfn"]
+[ext_resource type="PackedScene" uid="uid://8ev3j0rswgy6" path="res://scenes/asteroid_buster.tscn" id="25_pl11u"]
+[ext_resource type="PackedScene" uid="uid://bv8e7wfjaybxl" path="res://scripts/other/main_menu_panel.tscn" id="26_twgab"]
+[ext_resource type="PackedScene" uid="uid://n2ojxwpkj67i" path="res://scenes/wave_complete_ui.tscn" id="28_suyxu"]
+[ext_resource type="PackedScene" uid="uid://c8wkbaviwreb1" path="res://scenes/game_over_ui.tscn" id="33_js0lu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayusw"]
 size = Vector2(90, 822)
@@ -31,14 +48,146 @@ size = Vector2(90, 822)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kc3iy"]
 size = Vector2(536, 178)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_twgab"]
+shader = ExtResource("24_twgab")
+shader_parameter/shine_color = Color(0, 1, 1, 1)
+shader_parameter/cycle_speed = 1.9270000915325
+shader_parameter/wave_count = 3.0
+shader_parameter/wave_intensity = 0.4390000208525
+
 [sub_resource type="LabelSettings" id="LabelSettings_m3y4h"]
 font = ExtResource("12_e7s3i")
 font_size = 17
 outline_size = 8
 outline_color = Color(0.149022, 0.176733, 0.23304, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sww3w"]
+bg_color = Color(0.339709, 0.355468, 0.427081, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.182079, 0.192054, 0.237263, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suyxu"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.74, 0.74, 0.74, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_sww3w"]
+line_spacing = 1.0
+font = ExtResource("12_e7s3i")
+font_size = 17
+outline_size = 4
+outline_color = Color(0.149022, 0.176733, 0.23304, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gxtfn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_v2yb1")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_js0lu")
+}],
+"loop": false,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ool0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_7025r")
+}],
+"loop": true,
+"name": &"yes",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pr1ej"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_8ool0")
+}],
+"loop": true,
+"name": &"no",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_m4url")
+}],
+"loop": true,
+"name": &"yes",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_05nbr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_m4url")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0sl42"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_8ool0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_js0lu"]
+font = ExtResource("12_e7s3i")
+font_size = 17
+outline_size = 11
+outline_color = Color(0.53, 0.53, 0.53, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_m4url"]
+font = ExtResource("12_e7s3i")
+font_size = 34
+outline_size = 12
+outline_color = Color(0.07751527, 0.09690771, 0.13196129, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_52gi2"]
 font = ExtResource("10_e1j6l")
+font_color = Color(0, 0.904031, 0.904031, 1)
+outline_size = 8
+outline_color = Color(0, 0.419346, 0.503155, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02fa5"]
+shader = ExtResource("24_twgab")
+shader_parameter/shine_color = Color(0, 0.5, 0.5, 0.1)
+shader_parameter/cycle_speed = 2.0
+shader_parameter/wave_count = 3.0
+shader_parameter/wave_intensity = 0.5
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgl2t"]
+font = ExtResource("10_e1j6l")
+font_size = 32
 font_color = Color(0, 0.904031, 0.904031, 1)
 outline_size = 8
 outline_color = Color(0, 0.419346, 0.503155, 1)
@@ -50,15 +199,17 @@ texture_filter = 1
 position = Vector2(0, -1)
 script = ExtResource("1_1vysj")
 
-[node name="GameElements" type="CanvasLayer" parent="."]
-layer = 0
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 12
+position = Vector2(160, 341)
+limit_left = 0
+limit_top = 0
+limit_right = 320
+limit_bottom = 640
+
+[node name="GameElements" type="Node2D" parent="."]
 visible = false
 script = ExtResource("2_pl11u")
-
-[node name="border_sprite" type="Sprite2D" parent="GameElements"]
-z_index = 5
-position = Vector2(160, 558)
-texture = ExtResource("15_oub8e")
 
 [node name="cannon" parent="GameElements" instance=ExtResource("2_vn7tc")]
 position = Vector2(160, 646)
@@ -80,51 +231,251 @@ shape = SubResource("RectangleShape2D_ayusw")
 position = Vector2(152, -47)
 shape = SubResource("RectangleShape2D_kc3iy")
 
+[node name="StaticBody2D2" type="Area2D" parent="GameElements/edge_borders"]
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameElements/edge_borders/StaticBody2D2"]
+position = Vector2(148, 735)
+shape = SubResource("RectangleShape2D_kc3iy")
+
 [node name="bullets" type="Node2D" parent="GameElements"]
 
 [node name="level" type="Node2D" parent="GameElements"]
 z_index = 2
 script = ExtResource("14_5jk8s")
 
-[node name="bg_filler" type="Sprite2D" parent="GameElements"]
-modulate = Color(1, 1, 1, 0.196078)
+[node name="endless_mode" type="Node2D" parent="GameElements"]
+script = ExtResource("5_qouja")
+
+[node name="chamber" parent="GameElements" instance=ExtResource("6_6byn1")]
+z_index = 3
+position = Vector2(1, 614)
+
+[node name="visual" type="Node2D" parent="GameElements"]
+
+[node name="Grid" type="Sprite2D" parent="GameElements/visual"]
+visible = false
+z_index = 3
+position = Vector2(257, 320)
+scale = Vector2(2, 2)
+texture = ExtResource("14_sgl2t")
+
+[node name="bg_filler" type="Sprite2D" parent="GameElements/visual"]
+modulate = Color(1, 1, 1, 0.31764707)
+z_index = -1
 position = Vector2(161, 344)
 scale = Vector2(2.135, 2.135)
 texture = ExtResource("3_310xv")
 
-[node name="bg_stars" type="Sprite2D" parent="GameElements"]
-z_index = -1
+[node name="bg_stars" type="Sprite2D" parent="GameElements/visual"]
+z_index = -2
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_a2str")
 centered = false
 offset = Vector2(-128, -64)
 script = ExtResource("4_b1y07")
 
-[node name="chamber" parent="GameElements" instance=ExtResource("6_6byn1")]
-position = Vector2(1, 614)
+[node name="border_sprite" type="Sprite2D" parent="GameElements/visual"]
+modulate = Color(0, 0.3533333, 0.4, 0.7176471)
+z_index = 5
+material = SubResource("ShaderMaterial_twgab")
+position = Vector2(161.5, 558)
+scale = Vector2(0.5140625, 1)
+texture = ExtResource("15_oub8e")
 
-[node name="hp_bar" parent="GameElements" instance=ExtResource("7_jn0vj")]
+[node name="border_sprite2" type="Sprite2D" parent="GameElements/visual"]
+visible = false
+modulate = Color(1, 1, 1, 0.24313726)
+z_index = 5
+position = Vector2(160, 351)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("15_oub8e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameElements"]
+
+[node name="hp_bar" parent="GameElements/CanvasLayer" instance=ExtResource("7_jn0vj")]
+z_index = 7
 offset_left = 297.0
-offset_top = 570.0
+offset_top = 569.0
 offset_right = 307.0
-offset_bottom = 628.0
+offset_bottom = 627.0
 scale = Vector2(1.5, 1.5)
+mouse_filter = 2
 
-[node name="HpBar" type="Sprite2D" parent="GameElements/hp_bar"]
+[node name="HpBar" type="Sprite2D" parent="GameElements/CanvasLayer/hp_bar"]
 z_index = -1
 position = Vector2(5.33334, 29.3333)
 texture = ExtResource("8_t7025")
 
-[node name="hp_bar_label" type="Label" parent="GameElements/hp_bar"]
+[node name="hp_bar_label" type="Label" parent="GameElements/CanvasLayer/hp_bar"]
 layout_mode = 0
-offset_left = -25.999998
-offset_top = -16.666666
-offset_right = 52.0
-offset_bottom = 6.333334
-scale = Vector2(0.8, 0.8)
+offset_left = -13.333331
+offset_top = -13.333332
+offset_right = 64.66667
+offset_bottom = 9.666668
+scale = Vector2(0.5, 0.5)
 text = "HP"
 label_settings = SubResource("LabelSettings_m3y4h")
 horizontal_alignment = 1
+
+[node name="power_bar" parent="GameElements/CanvasLayer" instance=ExtResource("7_jn0vj")]
+z_index = 2
+offset_left = 299.0
+offset_top = 267.0
+offset_right = 309.0
+offset_bottom = 367.66666
+scale = Vector2(1.5, 1.5)
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_sww3w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_suyxu")
+script = ExtResource("13_sww3w")
+
+[node name="HpBar" type="Sprite2D" parent="GameElements/CanvasLayer/power_bar"]
+z_index = -1
+position = Vector2(5.3333335, 49.333332)
+scale = Vector2(1.041666, 1.7057291)
+texture = ExtResource("8_t7025")
+
+[node name="hp_bar_label" type="Label" parent="GameElements/CanvasLayer/power_bar"]
+layout_mode = 0
+offset_left = -25.333332
+offset_top = 15.333335
+offset_right = 52.666668
+offset_bottom = 112.333336
+scale = Vector2(0.8, 0.8)
+text = "P
+O
+W
+E
+R"
+label_settings = SubResource("LabelSettings_sww3w")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameElements/CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 298.0
+offset_top = 423.0
+offset_right = 314.0
+offset_bottom = 439.0
+scale = Vector2(1.2, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GameElements/CanvasLayer/Button"]
+sprite_frames = SubResource("SpriteFrames_gxtfn")
+animation = &"off"
+autoplay = "on"
+centered = false
+
+[node name="cannon_pos_button" type="Button" parent="GameElements/CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 5
+offset_left = 218.00002
+offset_top = 657.0
+offset_right = 234.00002
+offset_bottom = 673.0
+scale = Vector2(1.2, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GameElements/CanvasLayer/cannon_pos_button"]
+sprite_frames = SubResource("SpriteFrames_8ool0")
+animation = &"yes"
+autoplay = "yes"
+centered = false
+
+[node name="cam_zoom_button" type="Button" parent="GameElements/CanvasLayer"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 7
+offset_left = 80.0
+offset_top = 657.0
+offset_right = 96.0
+offset_bottom = 673.0
+scale = Vector2(1.2, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GameElements/CanvasLayer/cam_zoom_button"]
+sprite_frames = SubResource("SpriteFrames_pr1ej")
+animation = &"yes"
+autoplay = "yes"
+centered = false
+
+[node name="pos_confirm_button" type="Button" parent="GameElements/CanvasLayer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+z_index = 5
+offset_left = 241.00002
+offset_top = 657.0
+offset_right = 257.0
+offset_bottom = 673.0
+scale = Vector2(1.2, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GameElements/CanvasLayer/pos_confirm_button"]
+sprite_frames = SubResource("SpriteFrames_05nbr")
+autoplay = "default"
+centered = false
+
+[node name="pos_cancel_button" type="Button" parent="GameElements/CanvasLayer"]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+z_index = 5
+offset_left = 264.0
+offset_top = 657.0
+offset_right = 280.0
+offset_bottom = 673.0
+scale = Vector2(1.2, 1.2)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GameElements/CanvasLayer/pos_cancel_button"]
+sprite_frames = SubResource("SpriteFrames_0sl42")
+autoplay = "default"
+centered = false
+
+[node name="hits_label" type="Label" parent="GameElements/CanvasLayer"]
+visible = false
+z_index = 7
+offset_left = -52.999992
+offset_top = 44.000008
+offset_right = 147.0
+offset_bottom = 68.0
+rotation = -0.09773844
+pivot_offset = Vector2(100, 12)
+text = "5 hits!"
+label_settings = SubResource("LabelSettings_js0lu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Light" type="Sprite2D" parent="GameElements/CanvasLayer/hits_label"]
+z_index = -1
+position = Vector2(100.09758, 11.004766)
+rotation = -0.9023352
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("22_8ool0")
+
+[node name="Line2D" type="Line2D" parent="GameElements/CanvasLayer"]
+visible = false
+z_index = 4
+position = Vector2(160, 645)
+points = PackedVector2Array(-50, 0, 50, 0)
+width = 4.0
+default_color = Color(1, 1, 1, 0.7176471)
+
+[node name="mass_label" type="Label" parent="GameElements/CanvasLayer/Line2D"]
+offset_left = -38.0
+offset_top = -23.0
+offset_right = 171.5
+offset_bottom = 23.0
+scale = Vector2(0.36, 0.36)
+text = "range: 20"
+label_settings = SubResource("LabelSettings_m4url")
+horizontal_alignment = 1
+
+[node name="line_min" type="Sprite2D" parent="GameElements/CanvasLayer"]
+visible = false
+z_index = 5
+position = Vector2(111, 645)
+scale = Vector2(2, 2)
+texture = ExtResource("22_m4url")
+
+[node name="line_max" type="Sprite2D" parent="GameElements/CanvasLayer"]
+visible = false
+z_index = 5
+position = Vector2(160, 645)
+scale = Vector2(2, 2)
+texture = ExtResource("22_m4url")
 
 [node name="main_menu_ui" type="CanvasLayer" parent="."]
 layer = 2
@@ -143,14 +494,8 @@ centered = false
 offset = Vector2(-128, -64)
 script = ExtResource("4_b1y07")
 
-[node name="space_panel" type="Sprite2D" parent="main_menu_ui"]
-z_index = 4
-position = Vector2(0, 406)
-scale = Vector2(2, 2)
-texture = ExtResource("5_pstqy")
-centered = false
-
 [node name="Label" type="Label" parent="main_menu_ui"]
+visible = false
 modulate = Color(1, 1, 1, 0.470588)
 z_index = 4
 offset_left = 235.0
@@ -162,6 +507,18 @@ text = "NeonTetra053"
 label_settings = SubResource("LabelSettings_m3y4h")
 horizontal_alignment = 2
 
+[node name="Label2" type="Label" parent="main_menu_ui"]
+modulate = Color(1, 1, 1, 0.470588)
+z_index = 4
+offset_left = -49.99997
+offset_top = 664.0
+offset_right = 63.00003
+offset_bottom = 687.0
+scale = Vector2(0.7, 0.7)
+text = "v0.5"
+label_settings = SubResource("LabelSettings_m3y4h")
+horizontal_alignment = 2
+
 [node name="main_menu_button" type="Button" parent="main_menu_ui"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 106.0
@@ -170,7 +527,7 @@ offset_right = 214.0
 offset_bottom = 251.0
 
 [node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button"]
-position = Vector2(54, 129)
+position = Vector2(54, 23)
 scale = Vector2(2, 2)
 texture = ExtResource("7_mafw4")
 
@@ -186,12 +543,36 @@ text = "PLAY"
 label_settings = SubResource("LabelSettings_52gi2")
 horizontal_alignment = 1
 
+[node name="main_menu_button_endless" type="Button" parent="main_menu_ui"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 106.0
+offset_top = 258.0
+offset_right = 214.0
+offset_bottom = 302.0
+
+[node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button_endless"]
+position = Vector2(54, 23)
+scale = Vector2(2, 2)
+texture = ExtResource("7_mafw4")
+
+[node name="Label" type="Label" parent="main_menu_ui/main_menu_button_endless"]
+z_index = 1
+layout_mode = 0
+offset_left = 15.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 39.0
+scale = Vector2(0.7, 0.7)
+text = "ENDLESS"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
 [node name="main_menu_button2" type="Button" parent="main_menu_ui"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 106.0
-offset_top = 260.0
+offset_top = 309.0
 offset_right = 214.0
-offset_bottom = 304.0
+offset_bottom = 353.0
 
 [node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button2"]
 position = Vector2(54, 22)
@@ -201,9 +582,8 @@ texture = ExtResource("7_mafw4")
 [node name="Label" type="Label" parent="main_menu_ui/main_menu_button2"]
 z_index = 1
 layout_mode = 0
-offset_left = 14.0
 offset_top = 14.0
-offset_right = 130.0
+offset_right = 160.0
 offset_bottom = 48.0
 scale = Vector2(0.7, 0.7)
 text = "COLLECTION"
@@ -213,21 +593,22 @@ horizontal_alignment = 1
 [node name="main_menu_button3" type="Button" parent="main_menu_ui"]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = 106.0
-offset_top = 314.0
+offset_top = 363.0
 offset_right = 214.0
-offset_bottom = 358.0
+offset_bottom = 407.0
 
 [node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button3"]
-position = Vector2(54, -85)
+position = Vector2(54, 22)
 scale = Vector2(2, 2)
 texture = ExtResource("7_mafw4")
 
 [node name="Label" type="Label" parent="main_menu_ui/main_menu_button3"]
+modulate = Color(1, 1, 1, 0.24313726)
 z_index = 1
 layout_mode = 0
-offset_left = 15.0
+offset_left = 10.0
 offset_top = 14.0
-offset_right = 128.0
+offset_right = 138.0
 offset_bottom = 48.0
 scale = Vector2(0.7, 0.7)
 text = "SETTINGS"
@@ -235,17 +616,23 @@ label_settings = SubResource("LabelSettings_52gi2")
 horizontal_alignment = 1
 
 [node name="main_menu_button4" type="Button" parent="main_menu_ui"]
-visible = false
 self_modulate = Color(1, 1, 1, 0)
+z_index = 3
 offset_left = 106.0
-offset_top = 367.0
+offset_top = 416.0
 offset_right = 214.0
-offset_bottom = 411.0
+offset_bottom = 460.0
+script = ExtResource("17_sww3w")
 
 [node name="sprite" type="Sprite2D" parent="main_menu_ui/main_menu_button4"]
 scale = Vector2(2, 2)
 texture = ExtResource("7_mafw4")
 centered = false
+
+[node name="SmallPanel" type="Sprite2D" parent="main_menu_ui/main_menu_button4"]
+position = Vector2(130, 21)
+scale = Vector2(2, 2)
+texture = ExtResource("17_qnb83")
 
 [node name="Label" type="Label" parent="main_menu_ui/main_menu_button4"]
 z_index = 1
@@ -259,49 +646,51 @@ text = "ASTEROID BUSTER"
 label_settings = SubResource("LabelSettings_52gi2")
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="main_menu_ui/main_menu_button4"]
+z_index = 1
+layout_mode = 0
+offset_left = 114.0
+offset_top = 17.0
+offset_right = 170.0
+offset_bottom = 51.0
+scale = Vector2(0.5, 0.5)
+text = "999G"
+label_settings = SubResource("LabelSettings_52gi2")
+horizontal_alignment = 1
+
 [node name="collection_menu" parent="main_menu_ui" instance=ExtResource("10_3gvjk")]
-visible = false
 z_index = 9
 offset_top = -23.0
 offset_bottom = -23.0
 
 [node name="logo_sprite" type="Sprite2D" parent="main_menu_ui"]
 z_index = 1
+material = SubResource("ShaderMaterial_02fa5")
 position = Vector2(159, 88)
 scale = Vector2(2, 2)
 texture = ExtResource("13_bhx41")
 
-[node name="ui" type="CanvasLayer" parent="."]
+[node name="buff_menu" parent="main_menu_ui" instance=ExtResource("25_gxtfn")]
 visible = false
+
+[node name="main_menu_panel" parent="main_menu_ui" instance=ExtResource("26_twgab")]
+position = Vector2(0, 406)
+scale = Vector2(2, 2)
+
+[node name="ui" type="CanvasLayer" parent="."]
 script = ExtResource("5_ep3n4")
 
-[node name="Button" type="Button" parent="ui"]
-visible = false
-offset_left = 269.0
-offset_top = 92.0
-offset_right = 340.0
-offset_bottom = 123.0
-scale = Vector2(0.7, 0.7)
-text = "RELOAD"
-
-[node name="Button2" type="Button" parent="ui"]
-visible = false
-offset_left = 268.0
-offset_top = 67.0
-offset_right = 339.0
-offset_bottom = 98.0
-scale = Vector2(0.7, 0.7)
-text = "Refresh"
-
 [node name="Button4" type="Button" parent="ui"]
-offset_left = 276.0
-offset_top = 118.0
-offset_right = 301.7143
-offset_bottom = 149.0
+visible = false
+offset_left = 276.00003
+offset_top = 116.99999
+offset_right = 301.71432
+offset_bottom = 148.0
 scale = Vector2(0.7, 0.7)
 text = "1"
 
 [node name="Button5" type="Button" parent="ui"]
+visible = false
 offset_left = 299.00003
 offset_top = 118.99999
 offset_right = 324.71432
@@ -310,6 +699,7 @@ scale = Vector2(0.7, 0.7)
 text = "2"
 
 [node name="Button6" type="Button" parent="ui"]
+visible = false
 offset_left = 277.0
 offset_top = 144.0
 offset_right = 302.7143
@@ -318,6 +708,7 @@ scale = Vector2(0.7, 0.7)
 text = "3"
 
 [node name="Button7" type="Button" parent="ui"]
+visible = false
 offset_left = 299.0
 offset_top = 145.00002
 offset_right = 324.7143
@@ -326,6 +717,7 @@ scale = Vector2(0.7, 0.7)
 text = "4"
 
 [node name="Button8" type="Button" parent="ui"]
+visible = false
 offset_left = 276.0
 offset_top = 171.0
 offset_right = 301.7143
@@ -334,6 +726,7 @@ scale = Vector2(0.7, 0.7)
 text = "5"
 
 [node name="Button9" type="Button" parent="ui"]
+visible = false
 offset_left = 300.00003
 offset_top = 170.0
 offset_right = 325.71432
@@ -342,6 +735,7 @@ scale = Vector2(0.7, 0.7)
 text = "6"
 
 [node name="Button10" type="Button" parent="ui"]
+visible = false
 offset_left = 278.0
 offset_top = 196.0
 offset_right = 303.7143
@@ -350,6 +744,7 @@ scale = Vector2(0.7, 0.7)
 text = "7"
 
 [node name="Button11" type="Button" parent="ui"]
+visible = false
 offset_left = 300.0
 offset_top = 194.99998
 offset_right = 325.7143
@@ -357,16 +752,41 @@ offset_bottom = 225.99998
 scale = Vector2(0.7, 0.7)
 text = "8"
 
-[node name="pause_button" type="Button" parent="ui"]
-modulate = Color(2.264654, 2.264654, 2.264654, 0)
-z_index = 2
-offset_left = 2.0000153
-offset_top = -3.9999924
-offset_right = 54.857132
-offset_bottom = 60.285706
+[node name="Button12" type="Button" parent="ui"]
+visible = false
+offset_left = 278.0
+offset_top = 220.00002
+offset_right = 303.7143
+offset_bottom = 251.00002
 scale = Vector2(0.7, 0.7)
-text = "
-"
+text = "9"
+
+[node name="Button13" type="Button" parent="ui"]
+visible = false
+offset_left = 300.0
+offset_top = 219.0
+offset_right = 325.7143
+offset_bottom = 250.0
+scale = Vector2(0.7, 0.7)
+text = "10"
+
+[node name="Button14" type="Button" parent="ui"]
+visible = false
+offset_left = 278.0
+offset_top = 246.00002
+offset_right = 303.7143
+offset_bottom = 277.0
+scale = Vector2(0.7, 0.7)
+text = "11"
+
+[node name="Button15" type="Button" parent="ui"]
+visible = false
+offset_left = 300.0
+offset_top = 245.0
+offset_right = 325.7143
+offset_bottom = 276.0
+scale = Vector2(0.7, 0.7)
+text = "12"
 
 [node name="Button3" type="Button" parent="ui"]
 offset_left = 234.0
@@ -376,65 +796,104 @@ offset_bottom = 73.0
 scale = Vector2(0.7, 0.7)
 text = "move enemies"
 
+[node name="Button16" type="Button" parent="ui"]
+offset_left = 274.0
+offset_top = 67.0
+offset_right = 337.85715
+offset_bottom = 98.0
+scale = Vector2(0.7, 0.7)
+text = "levels"
+
+[node name="pause_button" type="Button" parent="ui"]
+modulate = Color(2.264654, 2.264654, 2.264654, 0)
+z_index = 2
+offset_left = 2.0000153
+offset_top = 1.9999995
+offset_right = 40.57142
+offset_bottom = 41.999996
+scale = Vector2(0.7, 0.7)
+text = "
+"
+
 [node name="ui_top_bar" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("9_yyf2y")
 
 [node name="TopUi" type="Sprite2D" parent="ui/ui_top_bar"]
-position = Vector2(160, 9)
+position = Vector2(160, 42)
+scale = Vector2(2, 2)
 texture = ExtResource("10_bpsgb")
 
 [node name="Coin" type="Sprite2D" parent="ui/ui_top_bar"]
 z_index = 1
-position = Vector2(303, 21)
+position = Vector2(303, 16)
 scale = Vector2(2, 2)
 texture = ExtResource("11_11c4y")
 
 [node name="Coin2" type="Sprite2D" parent="ui/ui_top_bar"]
 self_modulate = Color(0, 0, 0, 0.305882)
-position = Vector2(301, 23)
+position = Vector2(301, 18)
 scale = Vector2(2, 2)
 texture = ExtResource("11_11c4y")
 
 [node name="Label" type="Label" parent="ui/ui_top_bar"]
 layout_mode = 0
-offset_left = 215.0
-offset_top = 14.0
-offset_right = 293.0
-offset_bottom = 37.0
+offset_left = 178.0
+offset_top = 9.0
+offset_right = 339.0
+offset_bottom = 77.0
+scale = Vector2(0.7, 0.7)
 text = "150"
-label_settings = SubResource("LabelSettings_m3y4h")
+label_settings = SubResource("LabelSettings_52gi2")
 horizontal_alignment = 2
 
 [node name="Label2" type="Label" parent="ui/ui_top_bar"]
 layout_mode = 0
-offset_left = 119.0
-offset_top = 13.0
-offset_right = 197.0
-offset_bottom = 36.0
+offset_left = 97.0
+offset_top = 6.0
+offset_right = 347.0
+offset_bottom = 74.0
+scale = Vector2(0.5, 0.5)
 text = "Ldew"
-label_settings = SubResource("LabelSettings_m3y4h")
+label_settings = SubResource("LabelSettings_sgl2t")
 horizontal_alignment = 1
 
 [node name="Pause" type="Sprite2D" parent="ui/ui_top_bar"]
-position = Vector2(20, 20)
+position = Vector2(16, 16)
 scale = Vector2(2, 2)
 texture = ExtResource("13_visnf")
 
 [node name="complete_menu" parent="ui" instance=ExtResource("15_7gt47")]
-visible = false
 
 [node name="pause_menu" parent="ui" instance=ExtResource("24_bhx41")]
 visible = false
 
+[node name="wave_complete_menu" parent="ui" instance=ExtResource("28_suyxu")]
+
+[node name="game_over_ui" parent="ui" instance=ExtResource("33_js0lu")]
+
+[node name="asteroid_buster" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="asteroid_buster" parent="asteroid_buster" instance=ExtResource("25_pl11u")]
+position = Vector2(1835, 15)
+
 [node name="focus_marker" type="Marker2D" parent="."]
 
+[node name="asteroid_marker" type="Marker2D" parent="."]
+position = Vector2(1416, -4)
+
+[connection signal="body_entered" from="GameElements/edge_borders/StaticBody2D2" to="." method="_on_static_body_2d_2_body_entered"]
+[connection signal="pressed" from="GameElements/CanvasLayer/Button" to="GameElements" method="_on_button_pressed"]
+[connection signal="pressed" from="GameElements/CanvasLayer/cannon_pos_button" to="GameElements" method="_on_cannon_pos_button_pressed"]
+[connection signal="pressed" from="GameElements/CanvasLayer/cam_zoom_button" to="." method="_on_cam_zoom_button_pressed"]
+[connection signal="pressed" from="GameElements/CanvasLayer/pos_confirm_button" to="GameElements" method="_on_pos_confirm_button_pressed"]
+[connection signal="pressed" from="GameElements/CanvasLayer/pos_cancel_button" to="GameElements" method="_on_pos_cancel_button_pressed"]
 [connection signal="pressed" from="main_menu_ui/main_menu_button" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="main_menu_ui/main_menu_button_endless" to="." method="_on_main_menu_button_endless_pressed"]
 [connection signal="pressed" from="main_menu_ui/main_menu_button2" to="." method="_on_main_menu_button_2_pressed"]
 [connection signal="pressed" from="main_menu_ui/main_menu_button4" to="." method="_on_main_menu_button_4_pressed"]
-[connection signal="pressed" from="ui/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="ui/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="ui/Button4" to="." method="_on_button_4_pressed"]
 [connection signal="pressed" from="ui/Button5" to="." method="_on_button_5_pressed"]
 [connection signal="pressed" from="ui/Button6" to="." method="_on_button_6_pressed"]
@@ -442,6 +901,11 @@ visible = false
 [connection signal="pressed" from="ui/Button8" to="." method="_on_button_8_pressed"]
 [connection signal="pressed" from="ui/Button9" to="." method="_on_button_9_pressed"]
 [connection signal="pressed" from="ui/Button10" to="." method="_on_button_10_pressed"]
-[connection signal="pressed" from="ui/Button11" to="." method="_on_button_2_pressed"]
-[connection signal="pressed" from="ui/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="ui/Button11" to="." method="_on_button_11_pressed"]
+[connection signal="pressed" from="ui/Button12" to="." method="_on_button_12_pressed"]
+[connection signal="pressed" from="ui/Button13" to="." method="_on_button_13_pressed"]
+[connection signal="pressed" from="ui/Button14" to="." method="_on_button_14_pressed"]
+[connection signal="pressed" from="ui/Button15" to="." method="_on_button_15_pressed"]
 [connection signal="pressed" from="ui/Button3" to="." method="_on_button_3_pressed"]
+[connection signal="pressed" from="ui/Button16" to="." method="_on_button_16_pressed"]
+[connection signal="pressed" from="ui/pause_button" to="." method="_on_pause_button_pressed"]

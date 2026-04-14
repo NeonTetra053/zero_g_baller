@@ -1,0 +1,369 @@
+[gd_scene load_steps=16 format=3 uid="uid://bv8e7wfjaybxl"]
+
+[ext_resource type="Texture2D" uid="uid://cfalr2utudc58" path="res://art/ui/main_menu/space_panel_1.png" id="1_8x78g"]
+[ext_resource type="Texture2D" uid="uid://dgvpdjlamlqgp" path="res://art/ui/main_menu/space_panel_2.png" id="2_hrquo"]
+[ext_resource type="Texture2D" uid="uid://ie27yx3ffgjo" path="res://art/ui/main_menu/space_panel_3.png" id="3_caxa7"]
+[ext_resource type="Texture2D" uid="uid://cxe62f7xsb6fn" path="res://art/ui/main_menu/space_panel_4.png" id="4_ch2a3"]
+[ext_resource type="Texture2D" uid="uid://c38l6ihhnljni" path="res://art/ui/main_menu/space_panel_5.png" id="5_ij4f7"]
+[ext_resource type="Texture2D" uid="uid://ci8o58qhwkiyj" path="res://art/ui/main_menu/space_panel_6.png" id="6_rbonx"]
+[ext_resource type="Texture2D" uid="uid://bm3u170s3wiaw" path="res://art/ui/main_menu/space_panel_7.png" id="7_gxcad"]
+[ext_resource type="Texture2D" uid="uid://u1gagskbxy5h" path="res://art/ui/main_menu/space_panel_8.png" id="8_b301o"]
+[ext_resource type="Texture2D" uid="uid://bkjxvdxb26n4q" path="res://art/ui/main_menu/button_2.png" id="9_vmuh3"]
+[ext_resource type="Texture2D" uid="uid://ddt62d2aa157l" path="res://art/ui/main_menu/button_1.png" id="10_ckbfp"]
+[ext_resource type="Script" uid="uid://bjloik3xvupit" path="res://animated_sprite_2d.gd" id="11_71ywx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7yfbx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8x78g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_hrquo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_caxa7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ch2a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ij4f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rbonx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gxcad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_b301o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2bw4w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vmuh3")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ckbfp")
+}],
+"loop": true,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="Shader" id="Shader_53dd7"]
+code = "shader_type canvas_item;
+
+// Controls for your spaceship panel
+uniform vec4 cyan_tint : source_color = vec4(0.0, 0.9, 0.9, 0.1);
+uniform float scanline_speed : hint_range(0.0, 2.0) = 0.1;
+uniform float static_speed : hint_range(0.0, 50.0) = 10.0;
+uniform float line_density : hint_range(10.0, 1000.0) = 600.0;
+uniform float jitter_amount : hint_range(0.0, 0.05) = 0.002;
+
+// Function to generate procedural \"Static\" noise
+float noise(vec2 uv, float time) {
+    return fract(sin(dot(uv, vec2(12.9898, 78.233) + time)) * 43758.5453);
+}
+
+void fragment() {
+    vec2 uv = UV;
+
+    // 1. ANIMATED SCREEN JITTER
+    // Randomly shifts the screen slightly left/right over time for that \"unstable\" look
+    float jitter = (noise(vec2(TIME, 0.0), TIME) - 0.5) * jitter_amount;
+    uv.x += jitter;
+
+    // 2. ANIMATED SCANLINES
+    // We use TIME multiplied by scanline_speed to make the lines \"roll\" down the screen
+    float rolling_lines = sin((uv.y + TIME * scanline_speed) * line_density);
+    rolling_lines = clamp(rolling_lines, 0.7, 1.0);
+
+    // 3. ANIMATED STATIC GRAIN
+    // The noise changes every frame based on TIME * static_speed
+    float grain = noise(uv, floor(TIME * static_speed));
+    
+    // 4. THE \"TUBE\" VIGNETTE
+    // Darkens the corners to look like a glass display
+    float vignette = 1.0 - distance(uv, vec2(0.5)) * 0.2;
+
+    // 5. SCREEN PULSE (FLICKER)
+    // Makes the brightness breathe slightly
+    float pulse = 0.95 + 0.05 * sin(TIME * 10.0);
+
+    // COMBINE EVERYTHING
+    vec3 final_color = cyan_tint.rgb;
+    final_color *= rolling_lines;       // Add the lines
+    final_color *= mix(0.9, 1.1, grain); // Add the grain texture
+    final_color *= vignette;            // Add corner darkness
+    final_color *= pulse;               // Add the brightness flicker
+
+    // Output with the original alpha (transparency)
+    COLOR = vec4(final_color, 0.2);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1imxl"]
+shader = SubResource("Shader_53dd7")
+shader_parameter/cyan_tint = Color(0, 0.9, 0.9, 0.1)
+shader_parameter/scanline_speed = 0.6750000320625
+shader_parameter/static_speed = 8.8510004204225
+shader_parameter/line_density = 92.7590039310525
+shader_parameter/jitter_amount = 0.05000000074506
+
+[node name="main_menu_panel" type="Node2D"]
+
+[node name="panel_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7yfbx")
+autoplay = "default"
+frame_progress = 0.94961894
+centered = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(145, 114)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -0.9999939
+anchor_top = -0.33333436
+anchor_right = 5.6666317
+anchor_bottom = 1.8888944
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(151, 114)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D2"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -0.9999939
+anchor_top = -0.33333436
+anchor_right = 5.6666317
+anchor_bottom = 1.8888944
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(151, 117)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D3"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -0.9999939
+anchor_right = 5.6666317
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(149, 117)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D4"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_right = 5.666684
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(147, 117)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D5"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_right = 5.666684
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(145, 117)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"on"
+autoplay = "on"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D6"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -0.9999939
+anchor_right = 5.6666317
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(147, 114)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"off"
+autoplay = "off"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D7"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_top = -0.33333436
+anchor_right = 5.666684
+anchor_bottom = 1.8888944
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(149, 114)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"off"
+autoplay = "off"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D8"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_top = -0.33333436
+anchor_right = 5.666684
+anchor_bottom = 1.8888944
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(153, 114)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"off"
+autoplay = "off"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D9"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_top = -0.33333436
+anchor_right = 5.666684
+anchor_bottom = 1.8888944
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="panel_sprite"]
+position = Vector2(153, 117)
+sprite_frames = SubResource("SpriteFrames_2bw4w")
+animation = &"off"
+autoplay = "off"
+centered = false
+script = ExtResource("11_71ywx")
+
+[node name="Button" type="Button" parent="panel_sprite/AnimatedSprite2D10"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = -1
+anchor_left = -1.0000031
+anchor_right = 5.666684
+offset_right = 8.0
+offset_bottom = 20.0
+scale = Vector2(0.15, 0.15)
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="panel_sprite"]
+z_index = 2
+material = SubResource("ShaderMaterial_1imxl")
+offset_left = 60.0
+offset_top = 81.0
+offset_right = 100.0
+offset_bottom = 111.0
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="panel_sprite"]
+z_index = 2
+material = SubResource("ShaderMaterial_1imxl")
+offset_left = 120.0
+offset_top = 84.0
+offset_right = 143.0
+offset_bottom = 104.0
+mouse_filter = 2
+
+[node name="ColorRect3" type="ColorRect" parent="panel_sprite"]
+z_index = 2
+material = SubResource("ShaderMaterial_1imxl")
+offset_left = 17.0
+offset_top = 84.0
+offset_right = 40.0
+offset_bottom = 104.0
+mouse_filter = 2
+
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D/Button" to="panel_sprite/AnimatedSprite2D" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D2/Button" to="panel_sprite/AnimatedSprite2D2" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D3/Button" to="panel_sprite/AnimatedSprite2D3" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D4/Button" to="panel_sprite/AnimatedSprite2D4" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D5/Button" to="panel_sprite/AnimatedSprite2D5" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D6/Button" to="panel_sprite/AnimatedSprite2D6" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D7/Button" to="panel_sprite/AnimatedSprite2D7" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D8/Button" to="panel_sprite/AnimatedSprite2D8" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D9/Button" to="panel_sprite/AnimatedSprite2D9" method="_on_button_pressed"]
+[connection signal="pressed" from="panel_sprite/AnimatedSprite2D10/Button" to="panel_sprite/AnimatedSprite2D10" method="_on_button_pressed"]

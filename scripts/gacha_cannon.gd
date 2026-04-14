@@ -77,8 +77,16 @@ func shoot(target_pos: Vector2) -> void:
 	var speed = lerp(min_speed, max_speed, t)
 	bullet.speed = speed
 	bullet.max_speed = speed
-
-	bullet.shoot(tube_sprite.rotation - deg_to_rad(90), 7) # type is irrelevant in gacha
+	bullet.linear_damp = 0
+	bullet.shoot(
+			tube_sprite.rotation - deg_to_rad(90), 
+			7, 
+			1, 
+			1, 
+			1, 
+			0,
+			1 # <--- New argument
+		) # type is irrelevant in gacha
 
 	shake()
 	emit_signal("gacha_shot_fired")
